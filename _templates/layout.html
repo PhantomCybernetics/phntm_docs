@@ -1,7 +1,131 @@
 {% extends "!layout.html" %}
+
 {% block sidebartitle %}
 <a href="/bridge/">
-  <img src="/bridge/_static/phntm_logo_white.png" class="logo" alt="Phntm Bridge"/>
+  <img src="/_static/phntm_logo_white.png" class="logo" alt="Phntm Bridge"/>
 </a>
 {% include "searchbox.html" %}
+{% endblock %}
+
+{%- block sidebarlogo %}
+{% endblock %}
+
+{%- block document %}
+    {% if page_source_suffix %}
+        {% set source_url = 'https://github.com/PhantomCybernetics/phntm_docs/blob/main/' ~ pagename ~ page_source_suffix %}
+        {% set source_link %}
+            <a class="source-link"
+                href="{{ source_url | e }}"
+                title="View source on GitHub"
+                target="_blank"
+                >[edit]</a>
+        {% endset %}
+        {{ super() | replace('</h1>', source_link ~ '</h1>', 1) }}
+    {% else %}
+        {{ super() }}
+    {% endif %}
+{% endblock %}
+
+{%- block body_tag %}
+  <body>
+    <div id="body-cont">
+      <header id="toolbar" role="banner">
+        <!-- small logo — fades in on scroll -->
+        <a href="/" class="toolbar-logo" id="toolbarLogo" aria-label="Phantom Docs">
+            {% include "inline-logo-toolbar-docs.svg" %}
+        </a>
+
+        <!-- spacer to push nav to the right when logo is hidden -->
+        <div class="toolbar-spacer" id="toolbarSpacer"></div>
+
+        <div id="burger-menu">
+            <nav aria-label="Main navigation">
+                <ul class="toolbar-nav">
+                    <li clas="">
+                        <search id="searchbox" style="display: none" role="search">
+                            <div class="searchformwrapper">
+                            <form class="search" action="{{ pathto('search') }}" method="get">
+                                <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+                                <input type="submit" value="{{ _('Go') }}" />
+                            </form>
+                            </div>
+                        </search>
+                    </li>
+                    <li id="floating-toc" class="toc">
+                        {{ toctree(includehidden=True, collapse=True, maxdepth=10) }}  
+                    </li>
+                    <li class="home light-link"><a href="{{ home_link }}">Home</a></li>
+                    <li class="phntm light-link"><a href="{{ home_link }}">Phantom Cybernetics</a></li>
+                    <li class="github light-link"><a href="{{ github_link }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li class="log-in light-link"><a href="https://remote.phntm.io">Remote</a></li>
+                    <li class="install">
+                        <a href="/bridge/install" class="btn-install">
+                            <span>↓</span> Install Bridge Client
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <script>document.getElementById('searchbox').style.display = "block"</script>
+      </header>
+{% endblock %} # end in footer
+
+{%- block sidebar1 %}
+<div id="toc" class="toc">  
+  {{ toctree(includehidden=True, collapse=True, maxdepth=10) }}  
+</div>
+{% endblock %}
+
+{%- block sidebartoc %}
+{%- endblock %}
+
+{% block footer %}
+</div> <!-- body-cont -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+      
+      <div class="footer-col">
+          <h4>Phantom Cybernetics&nbsp;Inc.</h4>
+          <p class="company-links">
+              <span class="icon mail"></span> <a href="mailto:human@phntm.io">human@phntm.io</a><br>
+              <span class="icon canada"></span> Vancouver Island, BC, Canada
+          </p>
+      </div>
+
+      <div class="footer-col">
+          <h4>Phantom Bridge</h4>
+          <ul>                        
+              <li><a href="/bridge/install">Install Bridge Client</a></li>
+              <li><a href="/remote/demos">Live Demos</a></li>
+              <li><a href="https://docs.phntm.io/bridge/availability-zones">Availability Zones</a></li>
+              <li><a href="https://docs.phntm.io/bridge/self-hosted">Self Hosting</a></li>
+              <li><a href="mailto:human@phntm.io">Support</a></li>
+          </ul>
+      </div>
+
+      <div class="footer-col">
+          <h4>Developers</h4>
+          <ul>
+              <li><a href="/">Documentation</a></li>
+              <li><a href="{{ github_link }}">GitHub</a></li>
+          </ul>
+      </div>
+
+      <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+              <!-- <li><a href="/about">About</a></li> -->
+              <li><a href="https://bsky.app/profile/phntm.io" target="_blank">News &amp; Updates</a></li>
+              <li><a href="https://wellfound.com/company/phantom-cybernetics/jobs" target="_blank">Careers</a></li>
+          </ul>
+      </div>
+  </div>
+
+  <div class="footer-bottom">
+      <span>&copy; 2026 Phantom Cybernetics Inc. All rights reserved.</span>
+      <span>
+          <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a>
+      </span>
+  </div>
+</footer>
 {% endblock %}

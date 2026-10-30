@@ -6,8 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'PHNTM Bridge'
-copyright = '2025, Phantom Cybernetics Inc'
+project = 'Phantom'
+copyright = '2026, Phantom Cybernetics Inc'
 author = 'Mirek Burkon'
 
 # -- General configuration ---------------------------------------------------
@@ -30,14 +30,14 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_logo = 'img/phntm_logo_white.png'
-html_favicon = 'img/favicon-white-16x16.png'
-html_theme = 'sphinx_rtd_theme'
+html_favicon = 'img/favicon.png'
+html_theme = 'basic'
 # html_baseurl = '/bridge/'
 html_static_path = ['_static']
 html_file_suffix = ''
 
 html_css_files = [
-    '/bridge/_static/custom.css',
+    'custom.css',
 ]
 
 html_js_files = [
@@ -47,7 +47,7 @@ html_js_files = [
 ]
 
 redirects = {
-    "ui/ros-services": "ros-services-and-actions",
+    "bridge/ui/ros-services": "bridge/ros-services-and-actions",
 }
 
 # js_source_path = [
@@ -58,15 +58,22 @@ redirects = {
 #     '../bridge_ui/static/widgets/world-model-3d',
 # ]
 
-root_for_relative_js_paths = '../bridge_ui/static'
+# root_for_relative_js_paths = '../bridge_ui/static'
 
 # github_url = 'https://github.com/PhantomCybernetics'
 vcs_pageview_mode = 'edit'
 
-html_theme_options = {
-    'logo_only': True,
-    'collapse_navigation': True,
-    'style_external_links': True,
+#pygments_style = "github-dark"
+pygments_style = "lightbulb"
+
+
+html_context = {
+    'github_link': 'https://github.com/PhantomCybernetics',
+    'home_link': 'https://localhost:3000'
+    # 'logo_only': True,
+    # 'collapse_navigation': True,
+    # 'style_external_links': True,
+    # 'sidebar_collapse': False,
     # 'prev_next_buttons_location': 'bottom',
     # 'style_external_links': False,
     # 'vcs_pageview_mode': '',
@@ -81,3 +88,49 @@ html_theme_options = {
     # 'includehidden': True,
     # 'titles_only': False
 }
+
+from pathlib import PurePosixPath
+from urllib.parse import unquote, urlsplit
+
+from docutils import nodes
+from docutils.parsers.rst import Directive, directives
+
+class DeclaredLinkDirective(Directive):
+    required_arguments = 1
+    has_content = False
+
+    option_spec = {
+        "caption": directives.unchanged,
+        "file-name": directives.unchanged,
+    }
+
+    def run(self):
+        url = self.arguments[0]
+        caption = self.options.get("caption", "Declared in")
+        fname = self.options.get("file-name", "")
+        if fname:
+            filename = fname
+        else:
+            filename = unquote(PurePosixPath(urlsplit(url).path).name) or url
+
+        paragraph = nodes.paragraph(classes=["declared"])
+
+        if caption:
+            paragraph += nodes.Text(caption + " ")
+
+        paragraph += nodes.reference(
+            "",
+            filename,
+            refuri=url,
+        )
+
+        return [paragraph]
+
+
+def setup(app):
+    app.add_directive("declared-link", DeclaredLinkDirective)
+
+    return {
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }

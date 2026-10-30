@@ -1,10 +1,36 @@
-{% extends "!page.html" %}
+{%- extends "layout.html" %}
+
 {% block htmltitle %}
-  {% if pagename == 'index' %}
-    <title>{{ project }} Documentation</title>
+  {% if pagename == 'bridge/index' %}
+    <title>Phantom Bridge Documentation</title>
+  {% elif pagename == 'remote/index' %}
+    <title>Phantom Remote Documentation</title>
+  {% elif pagename == 'remote-ui-api/index' %}
+    <title>Phantom Remote UI Extension API Documentation</title>
+  {% elif pagename == 'bridge/server-api' %}
+    <title>Phantom Bridge Server API Documentation</title>
+  {% elif pagename == 'search' %}
+    <title>Search / {{ project }}</title>
+  {% elif parents %}
+
+    {% if parents[0].title == 'Phantom Bridge' %}
+      <title>{{ title }} / Phantom Bridge Documentation</title>
+    {% elif parents[0].title == 'Phantom Remote' %}
+       <title>{{ title }} / Phantom Remote Documentation</title>
+    {% elif parents[0].title == 'Remote UI Extension API' %}
+       <title>{{ title }} / Phantom Remote UI Extension API Documentation</title>
+    {% elif parents[0].title == 'Bridge Server API' %}
+       <title>{{ title }} / Phantom Bridge Server API Documentation</title>
+    {% else %}
+      <title>{{ title }} / {{ project }}</title>
+    {% endif %}    
+
   {% else %}
-    <title>{{ title }} / {{ project }} Documentation</title>
+    <title>{{ title }} / {{ project }}</title>
   {% endif %}
   <meta property="og:image" content="{{ pathto('_static/og_phntm_bridge_logo.png', 1) }}">
 {% endblock %}
 
+{% block body %}
+  {{ body }}
+{% endblock %}

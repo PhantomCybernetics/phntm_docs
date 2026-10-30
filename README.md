@@ -1,12 +1,12 @@
-# Phntm Bridge Docs
+# Phntm Docs
 
-Sources for https://docs.phntm.io/bridge
+Sources for https://docs.phntm.io
 
 ### Clone this repo
 ```bash
 cd ~
-git clone git@github.com:PhantomCybernetics/phntm_bridge_docs.git
-cd phntm_bridge_docs
+git clone git@github.com:PhantomCybernetics/phntm_docs.git
+cd phntm_docs
 ```
 
 ### Install Sphinx & Deps
@@ -19,7 +19,6 @@ source ~/sphinx_env/bin/activate
 pip install -U sphinx \
                sphinxcontrib.jquery \
                sphinxcontrib.email \
-               sphinx_rtd_theme \
                sphinx-reredirects
 ```
 
@@ -29,7 +28,12 @@ Video and image assets are loaded from S3 bucket `phntm-bridge-docs` via CloudFr
 ### Build the docs
 ```bash
 source ~/sphinx_env/bin/activate
-cd ~/phntm_bridge_docs
+cd ~/phntm_docs
 make linkcheck # checks links
 rm -rf _build/*; make html
+```
+
+### Run the Server
+```bash
+node server-docs.js
 ```
