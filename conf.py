@@ -60,7 +60,6 @@ redirects = {
 
 # root_for_relative_js_paths = '../bridge_ui/static'
 
-# github_url = 'https://github.com/PhantomCybernetics'
 vcs_pageview_mode = 'edit'
 
 #pygments_style = "github-dark"

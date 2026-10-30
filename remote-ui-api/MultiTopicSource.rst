@@ -1,5 +1,3 @@
-:github_url: https://github.com/PhantomCybernetics/phntm_bridge_docs/edit/main/ui-api-docs/MultiTopicSource.rst
-
 MultiTopicSource
 ================
 

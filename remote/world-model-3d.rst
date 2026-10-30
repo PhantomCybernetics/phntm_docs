@@ -1,5 +1,3 @@
-:github_url: https://github.com/PhantomCybernetics/phntm_bridge_docs/edit/main/ui-widgets/world-model-3d.rst
-
 World Model 3D
 ==============
 

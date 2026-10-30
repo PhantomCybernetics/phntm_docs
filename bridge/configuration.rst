@@ -1,5 +1,3 @@
-:github_url: https://github.com/PhantomCybernetics/phntm_bridge_docs/edit/main/basics/configuration.rst
-
 Configuration
 =============
 A YAML configuration file is generated in the registration step of the Bridge Client install process. In this documentation we refer to it as ``phntm_bridge.yaml``,

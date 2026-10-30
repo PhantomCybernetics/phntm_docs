@@ -1,5 +1,3 @@
-:github_url: https://github.com/PhantomCybernetics/phntm_bridge_docs/edit/main/basics/install.rst
-
 Install Bridge Client
 =====================
 
@@ -50,7 +48,7 @@ Full list of configuration options can be found :doc:`here <configuration>`.
 
     /**:
       ros__parameters:
-      
+
         id_robot: '%ID_ROBOT%'
         key: '%SECRET_KEY%'
         name: 'My Little Robot'
