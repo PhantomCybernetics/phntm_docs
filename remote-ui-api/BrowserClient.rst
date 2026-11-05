@@ -1,165 +1,69 @@
 BrowserClient
 =============
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/browser-client.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/browser-client.js
 
-This class is responsible for establishing WebRTC connection to the Robot, Socket.io connection to the Bridge Server, subscribing to topics, handling message calls, and so on.
+.. container:: class-constructor
 
+  .. js:autoclass:: BrowserClient 
 
-.. rubric:: Instance Attributes
+.. container:: instance-attributes
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-instance-attributes
+  .. rubric:: Instance Attributes (Read only)
+  .. js:autoattribute:: BrowserClient#discovered_nodes
+  .. js:autoattribute:: BrowserClient#discovered_services
+  .. js:autoattribute:: BrowserClient#discovered_topics
+  .. js:autoattribute:: BrowserClient#id_instance
+  .. js:autoattribute:: BrowserClient#id_robot
+  .. js:autoattribute:: BrowserClient#open_media_streams
+  .. js:autoattribute:: BrowserClient#name
+  .. js:autoattribute:: BrowserClient#pc
+  .. js:autoattribute:: BrowserClient#socket
+  .. js:autoattribute:: BrowserClient#supported_msg_types
+  .. js:autoattribute:: BrowserClient#topic_streams
+  .. js:autoattribute:: BrowserClient#ui
 
-   * - **discovered_nodes**
-     - *{ 'id_node': { NodeInfo } }*
-     - Discovered nodes, publishers, subscribers and services
-   * - **discovered_services**
-     - *{ 'id_service': { ServiceInfo } }*
-     - Discovered services and their message types
-   * - **discovered_topics**
-     - *{ 'id_topic': { TopicInfo } }*
-     - Discovered topics and their message types
-   * - **id_instance**
-     - *String*
-     - This peer's session (app instance) ID from Bridge Server
-   * - **id_robot**
-     - *String*
-     - Robot ID
-   * - **media_streams**
-     - *{ 'id_stream': MediaStream }*
-     - Open inbound media streams
-   * - **name**
-     - *String*
-     - Robot name
-   * - **pc**
-     - *PeerConnection*
-     - WebRTC peer connection object
-   * - **pc_session**
-     - *String*
-     - This peer's WebRTC session ID
-   * - **socket**
-     - *Socket.io*
-     - Socket.io connection object
-   * - **supported_msg_types**
-     - *InterfaceDefinition[]*
-     - All received message type definitions
-   * - **topic_streams**
-     - *{ 'id_topic': id_stream }*
-     - Open inbound data channels
-   * - **ui**
-     - :doc:`PanelUI <PanelUI/>`
-     - Reference to Panel UI
-   
+.. container:: events
 
-.. rubric:: Events
+  .. rubric:: Triggers Events
+  .. js:autoattribute:: BrowserClient#event:defs_updated
+  .. js:autoattribute:: BrowserClient#event:docker
+  .. js:autoattribute:: BrowserClient#event:error
+  .. js:autoattribute:: BrowserClient#event:media_stream
+  .. js:autoattribute:: BrowserClient#event:nodes
+  .. js:autoattribute:: BrowserClient#event:peer_connected
+  .. js:autoattribute:: BrowserClient#event:peer_connection_changed
+  .. js:autoattribute:: BrowserClient#event:peer_disconnected
+  .. js:autoattribute:: BrowserClient#event:peer_service_call_broadcast
+  .. js:autoattribute:: BrowserClient#event:peer_stats
+  .. js:autoattribute:: BrowserClient#event:robot_peers
+  .. js:autoattribute:: BrowserClient#event:services
+  .. js:autoattribute:: BrowserClient#event:socket_connect
+  .. js:autoattribute:: BrowserClient#event:socket_disconnect
+  .. js:autoattribute:: BrowserClient#event:topics
+  .. js:autoattribute:: BrowserClient#event:update
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-events
+.. container:: instance-methods
 
-   * - **defs_updated**
-     -
-     - Discovered interface definitons changed
-   * - **docker**
-     - *{ 'host': DockerInfo }*
-     - Discovered Docker containers changed
-   * - **error**
-     - *Number* error, *String* message
-     - Received error from the robot
-   * - **media_stream**
-     - *String* id_topic, MediaStream stream
-     - Media stream opened for topic
-   * - **nodes**
-     - *{ 'id_node': NodeInfo }*
-     - Detected nodes changed
-   * - **peer_connected**
-     -
-     - WebRTC connection established
-   * - **peer_connection_changed**
-     -
-     - WebRTC connection changed
-   * - **peer_disconnected**
-     -
-     - WebRTC connection closed
-   * - **peer_service_call_broadcast**
-     - *{ service: String, msg: MsgType }*
-     - Some other peer called a service, this is the reply (used for UI syncing)
-   * - **peer_stats**
-     - *WebRTCStats* stats
-     - Peer connection stats generated
-   * - **robot_peers**
-     - *{ num_connected: Number, num_waiting: Number }*
-     - Received robot peer info
-   * - **services**
-     - *{ 'id_service': ServiceInfo }*
-     - Discovered services changed
-   * - **socket_connect**
-     - 
-     - Socket.io connected to the Bridge Server
-   * - **socket_disconnect**
-     -
-     - Socket.io Bridge Server connection lost
-   * - **topics**
-     - *{ 'id_topic': TopicInfo }*
-     - Discovered topics changed
-   * - **update**
-     -
-     - Received robot's state data or conneciton state changed (UI should update)
-
-
-.. rubric:: Methods
-
-.. list-table::
-   :widths: 45 55
-   :class: api-ref-methods
-
-   * - **constructor(** *BridgeClientOptions* opts **)**
-     - 
-   * - **connect()**
-     - Connect to the Bridge Server
-   * - **disconnect()**
-     - Disconnect from the Bridge Server
-   * - **getConfigParam(** *String* key **)** : *Any*
-     - Returns config param from the YAML file
-   * - **getPeerConnectionInfo()** : *String[]*
-     - Returns WebRTC connection type and IP of the robot used
-   * - **getServiceConfig(** *String* service **)** : *Object*
-     - Returns config params for the service (from the YAML file)
-   * - **getTopicConfig(** *String* topic **)** : *Object*
-     - Returns config params for the topic (from the YAML file)
-   * - **off(** *String* event, *Callback* cb **)**
-     - Unregister callback from an event (see the list above)
-   * - **offServiceConfig(** *String* service, *Callback* cb **)**
-     - Unregisters callback from being called when service config updates
-   * - **offTopicConfig(** *String* topic, *Callback* cb **)**
-     - Unregisters callback from being called when topic config updates
-   * - **offTopicData(** *String* topic, *Callback* cb **)**
-     - Unsubscribe from topic messages
-   * - **offUIConfig(** *Callback* cb **)**
-     - Unregisters callback from being called when UI config updates
-   * - **on(** *String* event, *Callback* cb **)**
-     - Register a callback to be called on event (see the list above)
-   * - **once(** *String* event, *Callback* cb **)**
-     - Register a callback to be called once on event (see the list above)
-   * - **onServiceConfig(** *String* service, *Callback* cb **)**
-     - Registers a callback to be called when service config updates
-   * - **onTopicConfig(** *String* topic, *Callback* cb **)**
-     - Registers a callback to be called when topic config updates
-   * - **onTopicData(** *String* topic, *Callback* cb **)**
-     - Subscribe to topic messages
-   * - **onUIConfig(** *Callback* cb **)**
-     - Registers a callback to be called when UI config updates
-   * - | **openWriteChannel(** *String* topic, *String* msg_type,
-       | *Object* err_out = null **)** : Bool
-     - Opens write data channel for a topic, returns false on error and message err_out.message
-   * - | **requestRobotFileDownloadURL(** *String* path, *Bool* use_cdn,
-       | *Callback(String url)* cb, *Callback()* cb_err)**
-     - | Request file extraction from a robot (file:// or package://)
-   * - | **serviceCall(** *String* service, *MsgType* data,
-       | *Bool* silent_req, *Number* timeout_sec, *Callback* cb **)**
-     - | Performs a ROS service call, reply received via callback
-   * - **writeTopicData(** *String* topic, *MsgType* data **)** : *Bool*
-     - | Writes message into it a data channel opened with openWriteChannel().
-       | Returns false on failure.
+  .. rubric:: Instance Methods
+  .. js:autofunction:: BrowserClient#connect
+  .. js:autofunction:: BrowserClient#disconnect
+  .. js:autofunction:: BrowserClient#getConfigParam
+  .. js:autofunction:: BrowserClient#getPeerConnectionInfo
+  .. js:autofunction:: BrowserClient#getServiceConfig
+  .. js:autofunction:: BrowserClient#getTopicConfig
+  .. js:autofunction:: BrowserClient#off
+  .. js:autofunction:: BrowserClient#offServiceConfig
+  .. js:autofunction:: BrowserClient#offTopicConfig
+  .. js:autofunction:: BrowserClient#offTopicData
+  .. js:autofunction:: BrowserClient#offUIConfig
+  .. js:autofunction:: BrowserClient#on
+  .. js:autofunction:: BrowserClient#once
+  .. js:autofunction:: BrowserClient#onServiceConfig
+  .. js:autofunction:: BrowserClient#onTopicConfig
+  .. js:autofunction:: BrowserClient#onTopicData
+  .. js:autofunction:: BrowserClient#onUIConfig
+  .. js:autofunction:: BrowserClient#openWriteChannel
+  .. js:autofunction:: BrowserClient#requestRobotFileDownloadURL
+  .. js:autofunction:: BrowserClient#serviceCall
+  .. js:autofunction:: BrowserClient#writeTopicData

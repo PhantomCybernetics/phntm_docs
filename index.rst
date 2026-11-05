@@ -5,6 +5,6 @@
 
    remote/index
    bridge/index
-   remote-ui-api/index
-   bridge/server-api
+   Remote UI API <remote-ui-api/index>
+   Bridge Server API <bridge/server-api>
    

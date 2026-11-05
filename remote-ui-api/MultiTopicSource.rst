@@ -1,54 +1,33 @@
 MultiTopicSource
 ================
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/inc/multitopic.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/inc/multitopic.js
 
-This class creates a multi-topic data source used by :doc:`composite panel widgets <CompositePanelWidgetBase>`.
-It also adds its UI to the :doc:`panel <Panel>` menu and handles user interactions.
+.. container:: class-constructor
 
+  .. js:autoclass:: MultiTopicSource
 
-.. rubric:: Events
+.. container:: events
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-events
+  .. rubric:: Triggers Events
+  .. js:autoattribute:: MultiTopicSource#event:change
 
-   * - **change**
-     - *String[]* topics
-     - Trigerred on topics change
+.. container:: instance-methods
 
+  .. rubric:: Instance Methods
+  .. js:autofunction:: MultiTopicSource#add
+  .. js:autofunction:: MultiTopicSource#getSources
+  .. js:autofunction:: MultiTopicSource#hasType
+  .. js:autofunction:: MultiTopicSource#hasSources
+  .. js:autofunction:: MultiTopicSource#init
+  .. js:autofunction:: MultiTopicSource#off
+  .. js:autofunction:: MultiTopicSource#on
+  .. js:autofunction:: MultiTopicSource#topicSubscribed
 
-.. rubric:: Methods
-
-.. list-table::
-   :widths: 45 55
-   :class: api-ref-methods
-
-   * - **constructor(** :doc:`CompositePanelWidgetBase <CompositePanelWidgetBase>` widget **)**
-     - 
-   * - | **add(** *String* msg_type, *String* label, *String|null* default_topic,
-       | *Number* max_num, *Callback* cb_data, *Callback* cb_removed **)**
-     - Add slots for max_num topics (-1=unlimited) of type msg_type
-   * - **getSources()** : *String[]*
-     - Returns all currently selected topics
-   * - **hasType(** *String* msg_type **)** : *Bool*
-     - Returns true if at least one topic of msg_type is selected
-   * - **hasSources()** : *Bool*
-     - Returns true if any source topics are selected
-   * - **init()**
-     - Initialize, loads selected topics from widget's panel vars (call after adding sources)
-   * - **off(** *String* event, *Callback* callback **)**
-     - Unregister event handler
-   * - **on(** *String* event, *Callback* callback **)**
-     - Register event handler, see Events above
-   * - **topicSubscribed(** *String* topic **)** : *Bool*
-     - Returns true if the topic is selected
-   
-
-.. rubric:: Example
+.. rubric:: Code Example
 
 .. code-block:: javascript
-   :caption: multitopic-example.js
+   :caption: JavaScript
    
    import { CompositePanelWidgetBase } from 'widgets/composite-widget-base';
 

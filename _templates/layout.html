@@ -1,26 +1,16 @@
 {% extends "!layout.html" %}
 
-{% block sidebartitle %}
-<a href="/bridge/">
-  <img src="/_static/phntm_logo_white.png" class="logo" alt="Phntm Bridge"/>
-</a>
-{% include "searchbox.html" %}
-{% endblock %}
-
-{%- block sidebarlogo %}
-{% endblock %}
-
 {%- block document %}
-    {% if page_source_suffix %}
-        {% set source_url = 'https://github.com/PhantomCybernetics/phntm_docs/blob/main/' ~ pagename ~ page_source_suffix %}
-        {% set source_link %}
+    {% if page_source_suffix and page_source_link_prefix %}
+        {% set source_url = page_source_link_prefix ~ pagename ~ page_source_suffix %}
+        {% set page_source_link %}
             <a class="source-link"
                 href="{{ source_url | e }}"
                 title="View source on GitHub"
                 target="_blank"
                 >[edit]</a>
         {% endset %}
-        {{ super() | replace('</h1>', source_link ~ '</h1>', 1) }}
+        {{ super() | replace('</h1>', page_source_link ~ '</h1>', 1) }}
     {% else %}
         {{ super() }}
     {% endif %}
@@ -28,7 +18,11 @@
 
 {%- block body_tag %}
   <body>
-    <div id="body-cont">
+    {% if parents and parents[0] and parents[0].title in ['Phantom Remote UI API Reference', 'Bridge Server API'] %}
+        <div id="body-cont" class="api-docs">
+    {% else %}
+        <div id="body-cont">
+    {% endif %}
       <header id="toolbar" role="banner">
         <!-- small logo — fades in on scroll -->
         <a href="/" class="toolbar-logo" id="toolbarLogo" aria-label="Phantom Docs">
@@ -39,6 +33,7 @@
         <div class="toolbar-spacer" id="toolbarSpacer"></div>
 
         <div id="burger-menu">
+            <span id="burger-menu-icon"></span>
             <nav aria-label="Main navigation">
                 <ul class="toolbar-nav">
                     <li clas="">
@@ -57,7 +52,7 @@
                     <li class="home light-link"><a href="{{ home_link }}">Home</a></li>
                     <li class="phntm light-link"><a href="{{ home_link }}">Phantom Cybernetics</a></li>
                     <li class="github light-link"><a href="{{ github_link }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                    <li class="log-in light-link"><a href="https://remote.phntm.io">Remote</a></li>
+                    <li class="log-in light-link"><a href="{{ remote_link }}">Remote Pro</a></li>
                     <li class="install">
                         <a href="/bridge/install" class="btn-install">
                             <span>↓</span> Install Bridge Client
@@ -66,7 +61,14 @@
                 </ul>
             </nav>
         </div>
-        <script>document.getElementById('searchbox').style.display = "block"</script>
+        <script>
+            let bm = document.getElementById('burger-menu');
+            let bm_icon = document.getElementById('burger-menu-icon');
+            bm_icon.addEventListener("click", () => {
+                console.log('click');
+                bm.classList.toggle("active");
+            });
+        </script>
       </header>
 {% endblock %} # end in footer
 
@@ -87,19 +89,20 @@
       <div class="footer-col">
           <h4>Phantom Cybernetics&nbsp;Inc.</h4>
           <p class="company-links">
-              <span class="icon mail"></span> <a href="mailto:human@phntm.io">human@phntm.io</a><br>
+              <span class="icon mail"></span> <a href="mailto:{{ support_email }}">{{ support_email }}</a><br>
               <span class="icon canada"></span> Vancouver Island, BC, Canada
           </p>
       </div>
 
       <div class="footer-col">
-          <h4>Phantom Bridge</h4>
+          <h4>Phantom Remote</h4>
           <ul>                        
               <li><a href="/bridge/install">Install Bridge Client</a></li>
+              <li><a href="{{ remote_link }}">Remote Pro</a></li>
               <li><a href="/remote/demos">Live Demos</a></li>
-              <li><a href="https://docs.phntm.io/bridge/availability-zones">Availability Zones</a></li>
-              <li><a href="https://docs.phntm.io/bridge/self-hosted">Self Hosting</a></li>
-              <li><a href="mailto:human@phntm.io">Support</a></li>
+              <li><a href="/bridge/availability-zones">Availability Zones</a></li>
+              <li><a href="/bridge/self-hosted">Self Hosting</a></li>
+              <li><a href="mailto:{{ support_email }}">Support</a></li>
           </ul>
       </div>
 
@@ -115,8 +118,8 @@
           <h4>Company</h4>
           <ul>
               <!-- <li><a href="/about">About</a></li> -->
-              <li><a href="https://bsky.app/profile/phntm.io" target="_blank">News &amp; Updates</a></li>
-              <li><a href="https://wellfound.com/company/phantom-cybernetics/jobs" target="_blank">Careers</a></li>
+              <li><a href="{{ bsky_link }}" target="_blank">News &amp; Updates</a></li>
+              <li><a href="{{ jobs_link }}" target="_blank">Careers</a></li>
           </ul>
       </div>
   </div>
@@ -124,7 +127,7 @@
   <div class="footer-bottom">
       <span>&copy; 2026 Phantom Cybernetics Inc. All rights reserved.</span>
       <span>
-          <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a>
+          <a href="/remote/security-and-privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a>
       </span>
   </div>
 </footer>

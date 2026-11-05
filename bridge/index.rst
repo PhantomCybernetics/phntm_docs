@@ -8,13 +8,14 @@ Phantom Bridge
 ==============
 
 Phantom Bridge is a fast, open-source, WebRTC + WebSocket ROS2 networking stack written in C++, Python and Node.js.
-It comes with server infrastructe that fascilitates peer-to-peer handshake and fast low-latency connection.
-It's the basic networking layer behing :doc:`Phantom Remote </remote/index>` that can be also used separately from the UI.
+It consists of two ROS2 Nodes (Bridge Client and Bridge Agent) and Server infrastructure that facilitates peer-to-peer handshake and fast low-latency connection.
+This is the basic networking layer behind :doc:`Phantom Remote </remote/index>`, but can be also used independently.
 
-It also encodes video and point clouds using a GPU or other HW video encoder and compresses data, when necessary.
+The Bridge Client performs continuous introspection in the background and detects any running ROS2 Nodes, Topics, Services and Actions.
+It also compresses and encodes Image & CompressedImage topics, Video, and Point Clouds for network transport using a GPU or other HW video encoder where available.
 
-The Bridge comes with :doc:`Docker container control </remote/docker-control>` for the host machine, :doc:`system load </remote/system-info>`,
-Wi-Fi/Cellular signal strength monitoring, and highly customizable web UI called :doc:`Phantom Remote </remote/index>` for both desktop and mobile touchscreen devices.
+The Bridge Agent also implements :doc:`Docker container monitoring & control </remote/docker-control>`, :doc:`system load monitoring </remote/system-info>`,
+Wi-Fi / Cellular signal strength monitoring, and :doc:`Wi-fi scanning & AP roaming <wifi-scanning-and-roaming>`.
 
 .. toctree::
    :maxdepth: 5
@@ -23,8 +24,8 @@ Wi-Fi/Cellular signal strength monitoring, and highly customizable web UI called
 
    architecture
    install
-   configuration
-   upgrading
+   Configuration <configuration>
+   Upgrading <upgrading>
 
    custom-message-types.rst
    video-and-image-topics
@@ -32,8 +33,6 @@ Wi-Fi/Cellular signal strength monitoring, and highly customizable web UI called
    wifi-scanning-and-roaming
    connection-state-leds
 
-   /remote/security-and-privacy
-   
    availability-zones
    self-hosted
    roadmap-debugging-contributing
@@ -42,17 +41,10 @@ Wi-Fi/Cellular signal strength monitoring, and highly customizable web UI called
 
 - Connects P2P or via a TURN server when P2P link is not possible
 - ~5-10ms RTT on local network, 50ms+ RTT remote teleoperation via a TURN server
-- ROS topic and service discovery
-- Fast streamimg of binary ROS messages (both in a out)
-- Fast H.264 video streaming, ROS `Image` and `CompressedImage` topics streamed as H.264 video (hw or sw-encodeded frames)
-- Docker container :doc:`discovery and control </remote/docker-control>`
-- Reliable :doc:`ROS service & action calls </remote/ros-services-and-actions>`
-- :doc:`ROS parameneters </remote/runtime-ros-parameters>` discovery, read and write at runtime
-- Extra ROS packages can be easily included for :doc:`custom message type support <custom-message-types>`
-- Robot's Wi-Fi/Cellular signal monitoring, :doc:`Wi-Fi network scanning & AP roaming<wifi-scanning-and-roaming>`
-- :doc:`File retreival <file-extraction>` from any running Docker container and host fs (such as URDF models)
-- :doc:`System load, disk space </remote/system-info>`, and :doc:`Docker stats </remote/docker-control>` monitoring
-- Standalone lightweight Bridge Agent for monitoring and management of various parts of a distributed system
+- Fast streaming of binary ROS2 messages (both in a out)
+- Reliable :doc:`ROS2 Service & Action calls </remote/ros-services-and-actions>`
+- :doc:`ROS2 Parameneters </remote/runtime-ros-parameters>` discovery, read and write at runtime
+- Extra ROS2 packages can be easily included for :doc:`custom message type support <custom-message-types>`
+- :doc:`File retreival <file-extraction>` from any running Docker container and host FS (such as URDF models)
 - Multiple peers can connect to the same machine at a very low extra CPU cost
-- Works with `rosbag` and simulators such as `Gazebo`, `Isaac Sim` or `Webots`
-   
+- Works with rosbags and simulators such as MuJoCo, Gazebo, Isaac Sim or Webots

@@ -1,7 +1,9 @@
 Live Demos
 ==========
 
-Below are geografically distributed demos of the Phantom Remote running identical live Gazebo Harmonic simulations.
+.. Note:: All demos are currently down for maintenance. Please, check back later.
+
+Below are geographically distributed demos running identical live Gazebo Harmonic simulations.
 Pick the demo closest to you as physical distance to the server dictates your connection quality and RTT.
 
 .. raw:: html

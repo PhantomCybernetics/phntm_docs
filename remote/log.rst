@@ -1,10 +1,10 @@
-Logs
-====
+Logs Console
+============
 
 .. image:: https://d13exqa8fa735g.cloudfront.net/widget-log.gif
-    :class: widget-log
+    :class: widget-log cover-graphic
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/log.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/log.js
    :caption: Widget declared in
 
 Displays system logs such as ``/rosout`` for ``rcl_interfaces/msg/Log`` topics.

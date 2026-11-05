@@ -1,14 +1,10 @@
 Tablets & Mobile Phones
 =======================
 
-The Web UI is optimized for touchscreen devices, automatically detects phones and tablets and 
-adjusts for better ergonomy. The main menu with nodes, topics, services etc becomes a hamburger `≡` menu in the top left.
+Phantom Remote is optimized for Touchscreen devices, automatically detects Phones and Tablets and 
+adjusts for better ergonomy. The main menu with Nodes, Topics, Services etc becomes a hamburger ``≡`` menu in the top left.
 
-Virtual gamepad with two axes is provided and can be mapped to custom control messages same way you would map any physical controller.
-
-You can also add :ref:`custom buttons <custom-touchscreen-buttons>` that appear only when touchscreen is used. In the `Input Manager`,
-you'll see two placement options for custom buttons: top buttons are displayed all the time (when there's enough space) while bottom buttons
-are only shown with the virtual gamepad.
+Virtual Gamepad with two axes is provided and can be mapped to custom ROS2 control messages same way you would map any physical controller.
 
 .. raw:: html
 
@@ -22,14 +18,19 @@ are only shown with the virtual gamepad.
         <div class="tablet-screen-reflections"></div>
     </div>
 
-Touchscreen-specific Gestures
------------------------------
+Custom Touchscreen Buttons
+--------------------------
+You can also add :ref:`custom buttons <custom-touchscreen-buttons>` that appear only when Touchscreen is used. In the Input Manager,
+you'll see two placement options for custom buttons: top buttons are displayed all the time (when there's enough space), while bottom buttons
+are only shown with the Virtual Gamepad.
 
-* To resize or move a panel, ``tap and hold its title bar (the label) for 2 seconds``, until the panel turns green
-* To maximize any panel into fullscreen, ``double tap on its content``, then double tap on it again to exit fullscreen mode
+
+Touchscreen-Specific Gestures
+-----------------------------
+* To resize or move a Panel, ``tap and hold its title bar (the label) for 2 seconds``, until the Panel turns green
+* To maximize any Panel into Fullscreen, ``double tap on its content``, then double tap on it again to exit Fullscreen mode
 
 Fullscreen Mode
 ---------------
-
-* On Android, to switch the whole UI to fullscreen, click the ``[ ]`` icon in the `≡` hamburger menu
-* On iOS, only Safari is able to switch to fullscreen at the time of writing, use the ``Hide Toolbar`` option (neither mobile Opera nor Chrome offers fullscreen capability on iOS)
+* On Android, to switch the whole UI to Fullscreen, click the ``[ ]`` icon in the ``≡`` hamburger menu
+* On iOS, only Safari is able to switch to Fullscreen at the time of writing, use the ``Hide Toolbar`` option (neither mobile Opera nor Chrome offers fullscreen capability on iOS)

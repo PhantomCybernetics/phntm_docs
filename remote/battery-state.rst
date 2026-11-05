@@ -2,16 +2,16 @@ Battery State
 =============
 
 .. image:: https://d13exqa8fa735g.cloudfront.net/widget-battery.gif
-    :class: widget-battery
+    :class: widget-battery cover-graphic
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/battery.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/battery.js
     :caption: Widget declared in
 
 This panel displays robot's battery voltage from ``sensor_msgs/msg/BatteryState`` topics as a graph.
-At some point, `it will display current, too <https://github.com/PhantomCybernetics/phntm_bridge_ui/issues/3>`_
+At some point, `it will display current, too <https://github.com/PhantomCybernetics/phntm_remote/issues/3>`_
 
 
-.. rubric:: Configuration options
+.. rubric:: Configuration Options
 
 .. code-block:: yaml
    :caption: phntm_bridge.yaml

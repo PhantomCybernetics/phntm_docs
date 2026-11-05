@@ -3,12 +3,12 @@ Video
 
 .. raw:: html
 
-   <video autoplay muted loop class="video-panel-widget">
+   <video autoplay muted loop class="video-panel-widget cover-graphic">
       <source src="https://d13exqa8fa735g.cloudfront.net/video-widget.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/tree/main/static/widgets/video
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/tree/main/static/widgets/video
    :file-name: video-base.js
    :caption: Widget declared in
 
@@ -21,13 +21,13 @@ for configuration options related to video encoding.
 Detection2DArray Overlay
 ------------------------
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/video/detections2d.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/video/detections2d.js
 
 The panel can also overlay video frames with custom data. Out of this box, these are ``vision_msgs/msg/Detection2DArray`` topics,
 that are often used in computer vision. Below are configuration options for a Detection2DArray topic:
 
 .. code-block:: yaml
-   :caption: phntm_bridge.yaml or phnrm_agent.yaml
+   :caption: phntm_bridge.yaml
 
     /**:
       ros__parameters:
@@ -53,10 +53,10 @@ Implementing Custom Overlays
 
 To display any data you need over your video streams, you can create a custom video overlays by extending the :doc:`VideoPluginBase </remote-ui-api/VideoPluginBase>` class.
 
-There is one other very simple example available in :doc:`our demos <demos>` displaying `TwistStamped` messages as a visualisation of input keys.
-You will find the source code in the `Bridge UI Extras <https://github.com/PhantomCybernetics/bridge_ui_extras/tree/main/examples/custom-video-cmd-vel-overlay>`_ repository.
+There is one other very simple example available in :doc:`our demos <demos>` displaying `TwistStamped` messages as a visualization of input keys.
+You will find the source code in the `Remote Extras <https://github.com/PhantomCybernetics/remote_extras/tree/main/examples/custom-video-cmd-vel-overlay>`_ repository.
 It shows how to use custom graphics, CSS, and how to work with the UI API.
-In case you'd like to extend the `Detection2DArray` overlay shown above, the source code `is here <https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/video/detections2d.js>`_.
+In case you'd like to extend the `Detection2DArray` overlay shown above, the source code `is here <https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/video/detections2d.js>`_.
 
 See more details about creating, hosting and loading your own extensions
 in :doc:`Customizing the User Interface <customizing>`.

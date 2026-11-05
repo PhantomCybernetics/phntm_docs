@@ -1,15 +1,16 @@
 Availability Zones
 ==================
 
-The Phantom Bridge cloud infrastructure is hosted at various locations around the world to minimize lag and speed up downloads.
-When using over a local network, P2P connection is preferably established and geographical distance to servers plays a very small role.
+The Phantom Bridge Cloud infrastructure is hosted at various locations around the world to minimize lag and speed up asset downloads.
+When using Phantom Remote over a local network, P2P connection is preferably established and geographical distance to servers plays a very small role.
 When teleoperating a remote machine or connecting via a TURN server, physical distance is much more important.
 
-Below is the list of currenlty available locations. The closest one to your robot is automatically selected on machine registration,
+Below is the list of currently available locations. The closest one to your robot is automatically selected on machine registration,
 and can be also changed later. TURN servers are selected automatically.
 
 .. list-table::
    :widths: 25 25 25 25
+   :header-rows: 1
 
    * - Location
      - Bridge Server
@@ -53,7 +54,7 @@ and can be also changed later. TURN servers are selected automatically.
     });
    </script>
 
-To change which Bridge Server your ROS machine connects to, simply edit the ``bridge_server_address`` parameter in your `phntm_bridge.yaml` config file, then restart the Bridge Client node and reload the Web UI.
+To change which Bridge Server your ROS machine connects to, simply edit the ``bridge_server_address`` parameter in your ``phntm_bridge.yaml`` config file, then restart the Bridge Client node and reload the Remote.
 
 .. code-block:: yaml
    :caption: phntm_bridge.yaml  

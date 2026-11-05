@@ -5,17 +5,16 @@ Follow these steps to install the Phantom Bridge Client to your ROS2 machine.
 The Bridge Client is provided as a Docker container, ROS2 Humble to Rolling are supported.
 
 
-.. rubric:: Update Root SSL Certificates
+.. rubric:: Prequisities
+
+Make sure your Root SSL Certificates are up to date:
 
 .. code-block:: bash
 
     sudo apt update
     sudo apt install ca-certificates curl
 
-
-.. rubric:: Install Docker, Docker Build & Docker Compose
-
-E.g. on Debian/Ubuntu follow `these instructions <https://docs.docker.com/engine/install/debian>`_.
+Install Docker, Docker Build & Docker Compose, e.g. on Debian/Ubuntu follow `these instructions <https://docs.docker.com/engine/install/debian>`_.
 Then add the current user to the docker group:
 
 .. code-block:: bash
@@ -24,23 +23,23 @@ Then add the current user to the docker group:
     # reload session
 
 
-.. rubric:: Register a New Robot on the Bridge Server
+.. rubric:: Register New Robot On The Bridge Server
 
 This registers a new robot on the Bridge Server and returns a default config file you can edit further.
-Unique ID_ROBOT and KEY pair are generated in this step.
+Unique ``ID_ROBOT`` and ``KEY`` pair are generated in this step.
 
 .. code-block:: bash
 
     bash <(curl -s https://register.phntm.io/register.sh)
 
-Follow the instructions, a YAML configuration file will be generated and saved under the specified name (`phntm_bridge.yaml` is the default).
-Note that the default `register.phntm.io` hostname is geographically load-balanced and will return configuration with a Bridge Server instance nearest to you.
-You can switch to a different Bridge Server any time.
+Follow the Registration Utility's instructions, a YAML configuration file will be generated and saved under the specified name, ``phntm_bridge.yaml`` is used by default (and in this documentation).
+Note that the `register.phntm.io` service is geographically distributed and will return configuration with ``bridge_server_address`` set to the Bridge Server instance nearest to you.
+You can always switch to a different Bridge Server, see our :doc:`Availability Zones <availability-zones>` for current options.
 
 
-.. rubric:: Examine the Config File
+.. rubric:: Examine The Config File
 
-Below is an example of the config file generated in the previous step, e.g. `~/phntm_bridge.yaml`. \
+Below is an example of the config file generated in the previous step, e.g. ``phntm_bridge.yaml``. \
 Full list of configuration options can be found :doc:`here <configuration>`.
 
 .. code-block:: yaml
@@ -73,18 +72,18 @@ Full list of configuration options can be found :doc:`here <configuration>`.
         input_drivers: [ 'TwistInputDriver', 'JoyInputDriver' ] # enabled input drivers
 
 
-.. rubric:: Add Service to Your Compose File
+.. rubric:: Add Bridge Service To Your Compose File
 
-Add phntm_bridge service to your `~/compose.yaml` file with both `~/phntm_bridge.yaml` and `~/phntm_agent.yaml` mounted in the container as shown below.
+Add ``phntm_bridge`` service to your ``compose.yaml`` file with ``phntm_bridge.yaml`` mounted into the container as shown below.
 See available pre-built Docker images `here <https://ghcr.io/phantomcybernetics/phntm_bridge_client>`_.
 
 .. Note::
 
-    We recommend using Cyclone DDS with this Bridge as it offers a more predictable behavior,
-    the default Fast DDS sometimes fails to receive messages for topics that were unsubscribed and subscrubed to again.
+    We recommend using Cyclone DDS with Phantom Bridge as it offers a more predictable behavior,
+    the default Fast DDS sometimes fails to receive messages for topics that were unsubscribed and subscribed to again.
     Cyclone DDS is installed with our Docker image, and selected with the ``RMW_IMPLEMENTATION`` environmental variable.
 
-    All parts of your ROS2 system `should be using the same ROS version and the same RMW implementation <https://docs.ros.org/en/rolling/Concepts/Intermediate/About-Different-Middleware-Vendors.html>`_!
+    All parts of your ROS2 system should be always using `the same ROS distro and the same RMW implementation! <https://docs.ros.org/en/rolling/Concepts/Intermediate/About-Different-Middleware-Vendors.html>`_
 
 .. code-block:: yaml
     :caption: compose.yaml
@@ -123,20 +122,21 @@ See available pre-built Docker images `here <https://ghcr.io/phantomcybernetics/
           ros2 launch phntm_bridge client_agent_launch.py # launches Bridge Client and Agent together
 
 
-.. rubric:: Launch the Client & Open Phantom Remote
+.. rubric:: Launch Bridge Client & Open Phantom Remote
 
 .. code-block:: bash
 
     docker compose up phntm_bridge
 
-Then navigate to `https://remote.phntm.io/%YOUR_ID_ROBOT%` in your web browser.
+Then navigate to ``https://remote.phntm.io/%YOUR_ID_ROBOT%`` in your web browser.
 The exact URL will be printed out by the Registration Utility, also it can be found at the top of the generated Bridge config file.
 It will be also e-mailed to maintainer's address for your reference.
 
 
-.. rubric:: Building the Docker Image from Source
+.. rubric:: Building Docker Image From Source
 
-In the above example we've used a pre-built Docker image `provided by Phantom Cybernetics <https://ghcr.io/phantomcybernetics/phntm_bridge_client>`_, but you can also build your own from source:
+In the above example we've used a pre-built Docker Image `provided by Phantom Cybernetics <https://ghcr.io/phantomcybernetics/phntm_bridge_client>`_.
+You can also build your own from source:
 
 .. code-block:: bash
 

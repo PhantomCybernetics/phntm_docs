@@ -17,11 +17,9 @@ extensions = [
     'sphinxcontrib.jquery',
     'sphinxcontrib.email',
     'sphinx_reredirects',
+    'sphinxcontrib.spelling',
+    'sphinx_js',
 ]
-# 'sphinx_js'
-# it'd be nice to generate the exact same kind of documentation from live JS, 
-# but sphinx_js is shit and generates unreadable crap
-# so I guess we'll work on parsing later
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
@@ -35,6 +33,15 @@ html_theme = 'basic'
 # html_baseurl = '/bridge/'
 html_static_path = ['_static']
 html_file_suffix = ''
+
+root_for_relative_js_paths = "../phntm_remote/"
+js_source_path = [
+    "../phntm_remote/static/",
+    "../phntm_remote/static/widgets/inc/",
+    "../phntm_remote/static/input/",
+    "../phntm_remote/static/widgets/video/",
+    "../phntm_remote/static/widgets/world-model-3d/"
+]
 
 html_css_files = [
     'custom.css',
@@ -50,50 +57,29 @@ redirects = {
     "bridge/ui/ros-services": "bridge/ros-services-and-actions",
 }
 
-# js_source_path = [
-#     '../bridge_ui/static',
-#     '../bridge_ui/static/widgets',
-#     '../bridge_ui/static/widgets/inc',
-#     '../bridge_ui/static/widgets/video',
-#     '../bridge_ui/static/widgets/world-model-3d',
-# ]
+spelling_lang = "en_US"
+spelling_show_suggestions = True
+spelling_word_list_filename = "spelling_wordlist.txt"
 
-# root_for_relative_js_paths = '../bridge_ui/static'
-
-vcs_pageview_mode = 'edit'
-
-#pygments_style = "github-dark"
 pygments_style = "lightbulb"
-
 
 html_context = {
     'github_link': 'https://github.com/PhantomCybernetics',
-    'home_link': 'https://localhost:3000'
-    # 'logo_only': True,
-    # 'collapse_navigation': True,
-    # 'style_external_links': True,
-    # 'sidebar_collapse': False,
-    # 'prev_next_buttons_location': 'bottom',
-    # 'style_external_links': False,
-    # 'vcs_pageview_mode': '',
-    # 'style_nav_header_background': 'white',
-    # 'flyout_display': 'hidden',
-    # 'version_selector': True,
-    # 'language_selector': True,
-    # # Toc options
-    # 'collapse_navigation': True,
-    # 'sticky_navigation': True,
-    # 'navigation_depth': 4,
-    # 'includehidden': True,
-    # 'titles_only': False
+    'page_source_link_prefix': 'https://github.com/PhantomCybernetics/phntm_docs/blob/main/',
+    'home_link': 'https://localhost:3000',
+    'remote_link': 'https://remote.phntm.io',
+    'support_email': 'human@phntm.io',
+    'bsky_link': 'https://bsky.app/profile/phntm.io',
+    'jobs_link': 'https://wellfound.com/company/phantom-cybernetics/jobs',
 }
 
 from pathlib import PurePosixPath
 from urllib.parse import unquote, urlsplit
-
+from sphinx import addnodes
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
 
+# The declared-link directive
 class DeclaredLinkDirective(Directive):
     required_arguments = 1
     has_content = False
@@ -125,9 +111,39 @@ class DeclaredLinkDirective(Directive):
 
         return [paragraph]
 
+# Removes class name and other clutter from API docs TOC
+def shorten_js_toc_names(app, doctree):
+    class_names = [ "BrowserClient",
+                    "MultiTopicSource",
+                    "Panel",
+                    "PanelUI",
+                    "CompositePanelWidgetBase",
+                    "InputDriverBase",
+                    "ServiceInputBase",
+                    "SingleTypePanelWidgetBase",
+                    "VideoPluginBase",
+                    "WorldModel3DPluginBase"
+                    ]
+
+    for description in doctree.findall(addnodes.desc):
+        if description.get("domain") != "js":
+            continue
+
+        for signature in description.findall(addnodes.desc_signature):
+            name = signature.get("_toc_name", "")
+            for class_name in class_names:
+                prefix = class_name + "."
+                if name.startswith(prefix):
+                    name = "." + name[len(prefix):]
+                if name == class_name:
+                    name = "constructor"
+                if name.startswith(".event:"):
+                    name = "'" + name[len(".event:"):] + "' event"
+                signature["_toc_name"] = name
 
 def setup(app):
     app.add_directive("declared-link", DeclaredLinkDirective)
+    app.connect("doctree-read", shorten_js_toc_names, priority=400)
 
     return {
         "parallel_read_safe": True,

@@ -1,33 +1,25 @@
-Configuration
-=============
+Phantom Bridge Configuration
+============================
+
 A YAML configuration file is generated in the registration step of the Bridge Client install process. In this documentation we refer to it as ``phntm_bridge.yaml``,
-it needs to be mapped into the Client's container as ``/ros2_ws/phntm_bridge_params.yaml``. The initial file comes with your secret credentials and a few common options pre-configured.
-Here's the full reference of all the configurable options.
+it needs to be mapped into the Bridge Client's Docker container as `/ros2_ws/phntm_bridge_params.yaml`.
+The initial file comes with your secret credentials and a few common options pre-configured.
 
 
-Basics
-------
-.. code-block:: yaml
-   :caption: phntm_bridge.yaml
+Bridge Connection
+-----------------
 
-    /**:
-      ros__parameters:
+.. include:: ../config-blocks/bridge-connection.rst
 
-        id_robot: '%ID_ROBOT%' # robot's ID generated during registration
-        key: '%SECRET_KEY%' # robot's secret key generated during registration
-        name: 'Unnamed Robot' # the name to show in the UI
 
-        maintainer_email: 'robot.master@domain.com' # your e-mail for service announcements
-
-        bridge_server_address: https://us-ca.bridge.phntm.io # the Bridge Server instance to connect to
-
-The ``bridge_server_address`` parameter is initially set to the closest available Phantom Bridge Server from the robot's location.
-It can be changed as needed, for instance when the robot moves, see :doc:`Availability Zones </bridge/availability-zones>` for more servers.
+Remote UI Configuration
+-----------------------
+See :doc:`Phantom Remote Configuration </remote/configuration>` for UI-specific configuration options.
 
 
 Introspection & Blacklisting
 ----------------------------
-These settings affect how topics, nodes and services are discovered.
+These settings affect how Topics, Nodes and Services are discovered.
 
 .. code-block:: yaml
    :caption: phntm_bridge.yaml
@@ -45,44 +37,13 @@ These settings affect how topics, nodes and services are discovered.
 
 Topic Subscription QoS
 ----------------------
-Subscription QoS can be configured individually for every topic.
-When QoS is set to be ``RELIABLE``, extra effort is taken to make sure at least the latest message in the topic is always delivered.
-``BEST_EFFORT`` + ``VOLATILE`` are the default and recommended options for most topics, however, ``/rosout``, ``/robot_description`` and ``/tf_static`` topics are strongly recommented
-to be configured as ``RELIABLE`` + ``TRANSIENT_LOCAL`` to ensure delivery of all their messages. 
 
-Low FPS / Hz warning threshold can be also set individually for every topic, the default value is set by ``low_fps_default``.
-
-Note that ``Image``, ``CompressedImage`` and ``Video`` topics have different QoS defaults, more about this in :doc:`Video Processing </bridge/video-and-image-topics>`.
-
-.. code-block:: yaml
-   :caption: phntm_bridge.yaml
-
-    /**:
-      ros__parameters:
-
-        /some_topic:
-          reliability: BEST_EFFORT # SYSTEM_DEFAULT, RELIABLE, BEST_EFFORT (default)
-          durability: VOLATILE # SYSTEM_DEFAULT, TRANSIENT_LOCAL, VOLATILE (default)
-          history_depth: 10
-          lifespan_sec: -1.0 # -1.0 = Infinity (default)
-          low_fps: 10 # specify threshold for unhealthy FPS warning
-
-        # QoS defaults for all Image/CompressedImage topics
-        image_topics_default_reliability: BEST_EFFORT
-        image_topics_default_durability: VOLATILE
-        image_topics_default_depth: 1
-        image_topics_default_lifespan_sec: -1.0
-
-        # QoS defaults for all encoded Video topics
-        video_topics_default_reliability: RELIABLIE
-        video_topics_default_durability: VOLATILE
-        video_topics_default_depth: 10
-        video_topics_default_lifespan_sec: -1.0
+.. include:: ../config-blocks/topic-subscription-qos.rst
 
 
-Extra ROS Packages to Install
+Extra ROS Packages To Install
 -----------------------------
-Custom packages can be installed to enable support for any topic or service types, see :doc:`Custom message & Service types <custom-message-types>` for more details.
+Custom packages can be installed to enable support for any Topic or Service types, see :doc:`Custom message & Service types <custom-message-types>` for more details.
 
 .. code-block:: yaml
    :caption: phntm_bridge.yaml
@@ -96,38 +57,9 @@ Custom packages can be installed to enable support for any topic or service type
          - some-other-package # binary package name to be installed with apt-get (this will be translated ros-%DISTRO%-some-other-package)
 
 
-ROS Service & Action Controls
------------------------------
-See more in :doc:`Calling ROS Services & Actions </remote/ros-services-and-actions>`.
-
-.. code-block:: yaml
-   :caption: phntm_bridge.yaml
-
-    /**:
-      ros__parameters:
-
-        service_defaults: /ros2_ws/phntm_services_config.json # path to service defaults JSON file (inside the container)
-
-        collapse_unhandled_services: True # the UI will collapse services with unsupported message types
-        collapse_services: # list of service IDs and/or types to be collapsed in the UI
-          - rcl_interfaces/srv/DescribeParameters
-          - rcl_interfaces/srv/GetParameterTypes
-          - type_description_interfaces/srv/GetTypeDescription
-        
-        default_service_timeout_sec: 20.0 # default timeout for service replies 
-
-        # custom service menu widget mapping
-        /some_node/some_service:
-          menu_widget: ServiceInput_ClassName # widget class to use, must be included via ui_custom_includes_js
-          custom_widget_param_1: 0.5 # custom attributes for the widget class follow
-          custom_widget_param_2: 'This is a string param'
-          custom_widget_param_3: False
-          custom_widget_getter_service: /some_node/some_other_service
-
-
 Video Encoding & Streaming
 --------------------------
-See :doc:`Video & Image Topics Transmission </bridge/video-and-image-topics>` for complete explanation and complete list of configuration options.
+See :doc:`Video & Image Topics </bridge/video-and-image-topics>` for complete explanation and complete list of configuration options.
 
 .. code-block:: yaml
    :caption: phntm_bridge.yaml
@@ -158,7 +90,7 @@ Hardware LEDs
 -------------
 See :doc:`Connection State LEDs </bridge/connection-state-leds>` for more.
 
-.. include:: ../../config-blocks/leds.rst
+.. include:: ../config-blocks/leds.rst
 
 
 Socket.io Configuration
@@ -179,7 +111,7 @@ Socket.io Configuration
 
 WebRTC Configuration
 --------------------
-This config is received from the Brige Server but can be extended or overriden for use with custom ICE/TURN servers.
+This config is received from the Bridge Server but can be extended or overridden for use with custom ICE/TURN servers.
 
 .. code-block:: yaml
    :caption: phntm_bridge.yaml
@@ -218,11 +150,11 @@ File Extraction
 ---------------
 See :doc:`File extraction </bridge/file-extraction>` for full explanation.
 
-.. include:: ../../config-blocks/file-extraction.rst
+.. include:: ../config-blocks/file-extraction.rst
 
 
-Logs and Debugging
-------------------
+Logs & Debugging
+----------------
 .. code-block:: yaml
    :caption: phntm_bridge.yaml
 
@@ -245,7 +177,7 @@ In case of a distributed system, it can be also installed separately and run in 
 config file:
 
 .. code-block:: yaml
-   :caption: phntm_bridge.yaml or phnrm_agent.yaml
+   :caption: phntm_bridge.yaml or phntm_agent.yaml
 
     /**
       ros__parameters:

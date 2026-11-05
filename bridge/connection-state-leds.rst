@@ -1,8 +1,8 @@
 Connection State LEDs
 =====================
 
-If configured, the Bridge Client node will use two hardware LEDs on the robot to quickly communicate the state of connection and system activity.
-LEDs can be controlled diretly via `libgpiod <https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/about/>`_ (installed with the Docker container).
+If configured, the Bridge Client node will use two hardware LEDs on the robot to visually communicate the state of connection and system activity.
+LEDs can be controlled directly via `libgpiod <https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/about/>`_ (installed with the Bridge Client Docker container).
 Alternatively, the Bridge Client can produce ``std_msgs/msg/Bool`` topics to allow some other process to control the LEDs.
 
 

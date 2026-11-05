@@ -3,29 +3,29 @@ World Model 3D
 
 .. raw:: html
 
-   <video autoplay muted loop class="world-model-widget">
+   <video autoplay muted loop class="world-model-widget cover-graphic">
       <source src="https://d13exqa8fa735g.cloudfront.net/wolrd-model-3d-widget.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/tree/main/static/widgets/world-model-3d
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/tree/main/static/widgets/world-model-3d
    :file-name: world-model-base.js
    :caption: Widget declared in
 
-This is a *composite* widget that displays the URDF model from ``/robot_description`` and updates it with transforms from ``/tf_static`` and ``/tf``.
+This is a *composite* widget that displays the URDF model from the published robot description and updates it with transforms.
 Model files are :doc:`discovered on the robot </bridge/file-extraction>`, uploaded to the Bridge Server and cached there. Supported mesh formats are STL and DAE.
 By default, this widget expects the ``/robot_description``, ``/tf_static`` and ``/tf`` topics to exists and tries to subscribe to them, custom topics can be also used.
-The ``/tf_static`` and ``/robot_description`` topics should be subscribed to as `RELIABLE` to make sure every published message is received,
-the ``/tf`` topic is expected to be `BEST_EFFORT` and update continuously.
+The `/tf_static` and `/robot_description` topics should be subscribed to as `RELIABLE` to make sure every published message is received,
+the `/tf` topic is expected to be `BEST_EFFORT` and update continuously.
 
 The robot's model only updates when `/robot_description` changes, or on page reload. Call the ``/phntm_bridge/clear_cloud_file_cache`` service to invalidate
 the model cache on the Bridge server, then reload the page to fetch the models again.
 
 The URDF model can be meshed with additional data via overlays, several are implemented out-of-the-box and you can also create your own.
 
-This widget allows to switch beween orthographic and perpective camera. Skybox, light and ground plane can be also ajusted.
+This widget allows to switch between orthographic and perspective camera. Skybox, light and ground plane can be also adjusted.
 
-`SpaceMouse by 3Dconnexion <https://3dconnexion.com/spacemouse/>`_ can be used to control the camera. On Windows or Mac, use the `propriatery driver <https://3dconnexion.com/drivers/>`_ ,
+`SpaceMouse <https://3dconnexion.com/spacemouse/>`_ by 3DConnexion can be used to control the camera. On Windows or Mac, use the `propriatery driver <https://3dconnexion.com/drivers/>`_ ,
 on Linux we recommend the open-source alternative consisting of `spacenavd <https://github.com/FreeSpacenav/spacenavd>`_ and `spacenav-ws <https://github.com/PhantomCybernetics/spacenav-ws>`_ (X11 support is not required).
 
 .. rst-class:: overlay-section
@@ -35,7 +35,7 @@ CameraInfo Overlay
 
 .. raw:: html
 
-   <p class="declared">Declared in <a href="https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/world-model-3d/camera-info.js">camera-info.js</a></p>
+   <p class="declared">Declared in <a href="https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/world-model-3d/camera-info.js">camera-info.js</a></p>
 
 This overlay displays camera frustums based on the camera model received as ``sensor_msgs/msg/CameraInfo`` messages. Each frustum is mapped into the 
 corresponding `frame_id` frame on the robot's URDF model. You can set the display frustum color, near and far plane and even force `frame_id` in your
@@ -61,7 +61,7 @@ Detection3DArray Overlay
 
 .. raw:: html
 
-   <p class="declared">Declared in <a href="https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/world-model-3d/detections3d.js">detections3d.js</a></p>
+   <p class="declared">Declared in <a href="https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/world-model-3d/detections3d.js">detections3d.js</a></p>
 
 This overlay displays ``vision_msgs/msg/Detection3DArray`` topic messages, which are often used in computer vision,
 as simple oriented 3D bounding boxes or objects in the 3D scene. You can configure both label map, colors and 3D models to be used
@@ -93,7 +93,7 @@ LaserScan Overlay
 
 .. raw:: html
 
-   <p class="declared">Declared in <a href="https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/world-model-3d/laser.js">laser.js</a></p>
+   <p class="declared">Declared in <a href="https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/world-model-3d/laser.js">laser.js</a></p>
 
 Displays ``sensor_msgs/msg/LaserScan`` messages as 3D laser hits, mapped into the robot's `frame_id` received in message headers.
 
@@ -105,7 +105,7 @@ Range Overlay
 
 .. raw:: html
 
-   <p class="declared">Declared in <a href="https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/world-model-3d/range.js">range.js</a></p>
+   <p class="declared">Declared in <a href="https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/world-model-3d/range.js">range.js</a></p>
 
 Displays ``sensor_msgs/msg/Range`` range detection messages as 3D cones mapped into the robot's `frame_id` received in message headers.
 The `min_range` and `max_range` values are taken into account when rendering.
@@ -120,12 +120,12 @@ Implementing Custom Overlays
    :align: right
    :class: widget-world-model-battery
 
-We will be adding more 3D overlays such as `visualization markers <https://github.com/PhantomCybernetics/phntm_bridge_ui/issues/7>`_ or
-`path planning <https://github.com/PhantomCybernetics/phntm_bridge_ui/issues/10>`_, and so can you.
+We will be adding more 3D overlays such as `visualization markers <https://github.com/PhantomCybernetics/phntm_remote/issues/7>`_ or
+`path planning <https://github.com/PhantomCybernetics/phntm_remote/issues/10>`_, and so can you.
 In order to create a custom overlay plugin, you'll need to extend the :doc:`WorldModel3DPluginBase </remote-ui-api/WorldModel3DPluginBase>` class.
 You can examine source code of all the overlays mentioned above for inspiration.
 
-There's one extra simple example available in the `Bridge UI Extras repo <https://github.com/PhantomCybernetics/bridge_ui_extras/blob/main/examples/custom-world-model-battery-plugin/world-model-battery-plugin.js>`_
+There's one extra simple example available in the `Remote Extras <https://github.com/PhantomCybernetics/remote_extras/blob/main/examples/custom-world-model-battery-plugin/world-model-battery-plugin.js>`_ repo
 which displays the ``sensor_msgs/msg/BatteryState`` topic messages as virtual battery LEDs on back of the robot's model in our :doc:`demos <demos>`.
 
 See more details about creating, hosting and loading your own extensions

@@ -1,82 +1,41 @@
 VideoPluginBase
 ===============
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/video/video-plugin-base.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/video/video-plugin-base.js
 
-Extend this class to implement a custom plugin for the Video widget as outlined in the code snippet below.
-A working example - :ref:`video overlay displaying TwistStamped messages as input keys <implementing-custom-video-overlays>` - can be found `in the Extras 
-repository <https://github.com/PhantomCybernetics/bridge_ui_extras/tree/main/examples/custom-video-cmd-vel-overlay/>`_
-and also :doc:`live in our demos </remote/demos/>`. 
+.. container:: class-constructor
 
+  .. js:autoclass:: VideoPluginBase
 
-.. rubric:: Static Attributes
+.. container:: class-attributes
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-static-attributes
+  .. rubric:: Static Class Attributes
+  .. js:autoattribute:: VideoPluginBase#SOURCE_DEFAULT_TOPIC
+  .. js:autoattribute:: VideoPluginBase#SOURCE_DESCRIPTION
+  .. js:autoattribute:: VideoPluginBase#SOURCE_MAX_NUM
+  .. js:autoattribute:: VideoPluginBase#SOURCE_TOPIC_TYPE
 
-   * - static **SOURCE_DEFAULT_TOPIC**
-     - *String | Null*
-     - Default topic to select or null (default)
-   * - static **SOURCE_DESCRIPTION**
-     - *String* (required)
-     - Source description to show in the overlay selector
-   * - static **SOURCE_MAX_NUM**
-     - *Number*
-     - The maximum number of topics this plugin can handle, -1=unlimited (default)
-   * - static **SOURCE_TOPIC_TYPE**
-     - *String* (required)
-     - Source topic message type
+.. container:: instance-attributes
 
+  .. rubric:: Instance Attributes
+  .. js:autoattribute:: VideoPluginBase#client
+  .. js:autoattribute:: VideoPluginBase#overlays
+  .. js:autoattribute:: VideoPluginBase#panel
+  .. js:autoattribute:: VideoPluginBase#ui
+  .. js:autoattribute:: VideoPluginBase#video
 
-.. rubric:: Instance Attributes
+.. container:: instance-methods
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-instance-attributes
+  .. rubric:: Instance Methods
+  .. js:autofunction:: VideoPluginBase#addTopic
+  .. js:autofunction:: VideoPluginBase#clearAllTopics
+  .. js:autofunction:: VideoPluginBase#clearTopic
+  .. js:autofunction:: VideoPluginBase#clearVisuals
+  .. js:autofunction:: VideoPluginBase#onTopicData
+  .. js:autofunction:: VideoPluginBase#onResize
+  .. js:autofunction:: VideoPluginBase#setupMenu
 
-   * - **client**
-     - :doc:`BrowserClient <BrowserClient/>`
-     - Reference to Browser client
-   * - **overlays**
-     - *{ 'topic': custom_topic_data }*
-     - Custom overlay data by topic
-   * - **panel**
-     - :doc:`Panel <Panel/>`
-     - Reference to widget panel
-   * - **ui**
-     - :doc:`PanelUI <PanelUI/>`
-     - Reference to the UI
-   * - **video**
-     - *VideoWidget*
-     - Reference to Video widget
-
-
-.. rubric:: Methods
-
-.. list-table::
-   :widths: 45 55
-   :class: api-ref-methods
-
-   * - **constructor(** *VideoWidget* video **)**
-     - 
-   * - **addTopic(** *String* topic **)**
-     - Add topic to this plugin, called when the user selects a new topic as overlay input
-   * - **clearAllTopics()**
-     - Clear all topics.
-   * - **clearTopic(** *String* topic **)** 
-     - Clear one topic and all its visuals
-   * - **clearVisuals(** *String* topic **)**
-     - Remove all visuals for the topic here
-   * - **onTopicData(** *String* topic, *MsgType* msg **)** 
-     - Called when data for the topic is received
-   * - **onResize()**
-     - Called on panel/window resize
-   * - **setupMenu(** *jQuery* menu_els **)**
-     - Setup menu items by adding new lines into the provided menu_els container
-
-
-.. rubric:: Example
+.. rubric:: Code Example
 
 .. code-block:: javascript
    :caption: custom-video-plugin.js

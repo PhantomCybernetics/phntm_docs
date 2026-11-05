@@ -1,9 +1,10 @@
-Customizing
-===========
+Customizing & Extending Phantom Remote
+======================================
 
-There are several ways to extend or customize the :doc:`web User Interface <overview>` by loading custom JavaScript modules
-and CSS files into it. This is configured in the robot's ``phntm_bridge.yaml`` config file. None of the following techniques require
-you to to host any part of the Phantom Bridge cloud infrastructure besides your own extension sources.
+There are several ways to extend or customize the Remote UI by loading custom JavaScript modules
+and CSS files. This is configured in the robot's ``phntm_bridge.yaml`` config file. None of the following techniques require
+you to to host any part of the Phantom Bridge cloud infrastructure. Your own extension sources should be hosted on a publicly
+accessible server, but using `localhost` for development purposes also works.
 
 .. code-block:: yaml
    :caption: phntm_bridge.yaml
@@ -17,25 +18,25 @@ you to to host any part of the Phantom Bridge cloud infrastructure besides your 
         ui_custom_includes_css:
           - https://www.some-server.com/example.css
 
-.. Note:: In the example above, we are injecting CSS and JS files both from the localhost as well as a public web hosting.
-          Localhost can be indeed used for development puposes, keep in mind that all your extensions need to be available on the internet.
-          Included file that fails to load will likely break the UI, or cause unexpected behavior.
+.. Note:: Extension file that fails to load may break the UI or cause unexpected behavior.
+          In production, make sure your extensions are hosted on a publicly accessible URL.
 
-In the `Bridge UI Extras repository <https://github.com/PhantomCybernetics/bridge_ui_extras>`_, you will find all examples mentioned below
-and a lighweight Node.js server that can serve your extensions with the proper `CORS policy <https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS>`_
+In the `Remote Extras <https://github.com/PhantomCybernetics/phntm_remote_extras>`_ repository, you will find all examples mentioned below
+and a lightweight Node.js server that can serve your extensions with the proper `CORS policy <https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS>`_
 and SSL certificate, both required for security reasons by all modern browsers.
 
-Customizing of the Bridge Interface can be split into the following categories:
+Customizing of the Remote interface can be split into the following categories:
 
 
-Customizing CSS
----------------
+Changing the Looks With CSS
+---------------------------
 
-With custom CSS, you can override the default look, change colors, and load 2D graphics as needed. 
+With custom CSS, you can override the default color scheme, and load 2D graphics as needed. 
 A mechanism for pre-loading of custom images from your CSS files is included, use it to load graphics ahead of use to provide a smooth
-user experience. See examples in `css-example <https://github.com/PhantomCybernetics/bridge_ui_extras/tree/main/examples/css-example>`_, 
-the `demo-tweaks.css <https://github.com/PhantomCybernetics/bridge_ui_extras/blob/main/examples/css-example/demo-tweaks.css>`_ file
-in fact cointains modifications made for :doc:`the live demos <demos>`.
+user experience. See examples in `css-example <https://github.com/PhantomCybernetics/phntm_remote_extras/tree/main/examples/css-example>`_, 
+the `demo-tweaks.css <https://github.com/PhantomCybernetics/phntm_remote_extras/blob/main/examples/css-example/demo-tweaks.css>`_ file
+in fact contains modifications made for :doc:`the live demos <demos>`.
+
 
 Custom UI JS/CSS Includes
 -------------------------
@@ -52,6 +53,7 @@ Custom UI JS/CSS Includes
         ui_custom_includes_css:
           - https://www.some-server.com/example.css
 
+
 .. _custom-input-drivers:
 
 Custom Input Drivers
@@ -66,24 +68,29 @@ See more under :ref:`User Input & Teleoperation <implementing-custom-input-drive
 Custom Service Menu Widgets
 ---------------------------
 
-Any ROS service can be called with a pre-defined payload using the built-in UI functionality.
+Any ROS service can be called with a pre-defined payload using the built-in Remote functionality.
 You can also easily create a completely bespoke interface elements to be displayed in the Services
 menu and associated with your ROS services.
 
 See more under :ref:`Implementing Custom Service Widgets <implementing-custom-service-widgets>`.
 
 
-Single-type Panel Widgets
+Single-Type Panel Widgets
 -------------------------
 
-The UI comes with several built-in widgets for visualizing ROS topics based on their type.
+Remote comes with several built-in widgets for visualizing ROS2 topics based on their type.
 You can make your own custom panel widgets by extending the :doc:`SingleTypePanelWidgetBase </remote-ui-api/SingleTypePanelWidgetBase>` class.
 You can use either 2D graphics or create a custom 3D scene.
 
 There is a simple example widget :doc:`displaying Bool messages </remote/bool-example>` available in the
-`Extras repo <https://github.com/PhantomCybernetics/bridge_ui_extras/tree/main/examples/custom-bool-panel-widget>`_
+`Extras repo <https://github.com/PhantomCybernetics/phntm_remote_extras/tree/main/examples/custom-bool-panel-widget>`_
 and in our :doc:`live demos <demos>`.
 
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   Bool Widget Example <bool-example>
 
 Composite Panel Widgets
 -----------------------
@@ -94,13 +101,19 @@ in combination with robot's odometry.
 
 For a composite panel widget, you will need to extend the :doc:`CompositePanelWidgetBase </remote-ui-api/CompositePanelWidgetBase>` class.
 
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   Wi-fi Map Widget Example <wifi-map-example>
+
 
 2D Video Overlays
 -----------------
 
 The built-in :doc:`Video <video>` widget allows to create custom data overlays to display information over the video frames.
 In the :doc:`live demos <demos>`, you can see this work with `vision_msgs/msg/Detection2DArray` messages. There is one other example built-in displaying
-`TwistStamped` messages as a visualisation of the input keys.
+`TwistStamped` messages as a visualization of the input keys.
 
 In order to create a new video overlay plugin, extend the :doc:`VideoPluginBase </remote-ui-api/VideoPluginBase>` class.
 
@@ -108,38 +121,27 @@ In order to create a new video overlay plugin, extend the :doc:`VideoPluginBase 
 World Model 3D Plugins
 ----------------------
 
-In a simlar fashion, the :doc:`World Model 3D <world-model-3d/>` widget can also be extended to show custom data in 3D. One example of that would be
+In a similar fashion, the :doc:`World Model 3D <world-model-3d>` widget can also be extended to show custom data in 3D. One example of that would be
 the virtual battery LEDs shown on the robot in our :doc:`demos <demos>`. The widget can already combine several data types and show
-them on the URDF model animated with TF messages. You can add any other data visualisation or interactive element and map these to the
+them on the URDF model animated with TF messages. You can add any other data visualization or interactive element and map these to the
 correct reference frames on the URDF model.
 
 To create a custom plugin for the World Model 3D, extend the :doc:`WorldModel3DPluginBase </remote-ui-api/WorldModel3DPluginBase>` class.
 
-
-Example Widgets
----------------
-
-.. toctree::
-   :maxdepth: 1
-
-   bool-example
-   wifi-map-example
-
-
 Notes
 -----
 
-The public :doc:`User Interface API </remote-ui-api/index>` allows to add extra items to the panel's menu, create functional buttons in the title bar, open dialogs
-or store and load custom panel variables. You can read custom config parameters passed from the robot's ``phntm_bridge.yaml`` file both for the whole UI and for
-specific topics or services. You can also call ROS services programatically and write data into your topics via fast UDP Data Channels.
+The public :doc:`Remote Web UI API </remote-ui-api/index>` allows to add extra items to the panel's menu, create functional buttons in the title bar, open dialogs
+or store and load custom panel variables. You can read custom config parameters passed from the robot's ``phntm_bridge.yaml`` file both for Phantom Remote or for
+specific topics or services. You can also call ROS services programmatically and write data into your topics via fast UDP channels.
 
 `jQuery <https://jquery.com>`_, `D3.js <https://d3js.org>`_, `CanvasJS Charts <https://canvasjs.com>`_ and `Three.js <https://threejs.org>`_ are all
 available to your extensions out of the box and used by the built-in widgets. If you need some inspiration, take a look at how these are implemented.
 
 You can load custom graphics from the internet as well as :doc:`3D models and other sources from the robot </bridge/file-extraction>`.
 
-Browse the `Bridge UI Extras repository <https://github.com/PhantomCybernetics/bridge_ui_extras>`_ for example code and to see how your files need to be hosted.
-Feel free to `have a look <https://github.com/PhantomCybernetics/phntm_bridge_ui/tree/main/static/widgets>`_ at how the built-in widgets are
+Browse the `Remote Extras <https://github.com/PhantomCybernetics/phntm_remote_extras>`_ repository for example code and to see how your files need to be hosted.
+Feel free to `have a look <https://github.com/PhantomCybernetics/phntm_remote/tree/main/static/widgets>`_ at how the built-in widgets are
 implemented and use the API.
 
 If you create some useful extensions worth sharing with others, consider letting us know.

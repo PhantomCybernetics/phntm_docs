@@ -1,89 +1,46 @@
 WorldModel3DPluginBase
 ======================
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/world-model-3d/world-model-plugin-base.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/world-model-3d/world-model-plugin-base.js
 
-Extend this class to implement a custom plugin for the World Model 3D widget as outlined in the code snippet below.
-A working example - :ref:`overlay displaying Battery messages as virtual LEDs on the robot <implementing-custom-world-model-3d-overlays>` - can be found `in the Extras 
-repository <https://github.com/PhantomCybernetics/bridge_ui_extras/tree/main/examples/custom-world-model-battery-plugin/>`_
-and also :doc:`live in our demos </remote/demos/>`.
+.. container:: class-constructor
 
+  .. js:autoclass:: WorldModel3DPluginBase
 
-.. rubric:: Static Attributes
+.. container:: class-attributes
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-static-attributes
+  .. rubric:: Static Class Attributes
+  .. js:autoattribute:: WorldModel3DPluginBase#SOURCE_DEFAULT_TOPIC
+  .. js:autoattribute:: WorldModel3DPluginBase#SOURCE_DESCRIPTION
+  .. js:autoattribute:: WorldModel3DPluginBase#SOURCE_MAX_NUM
+  .. js:autoattribute:: WorldModel3DPluginBase#SOURCE_TOPIC_TYPE
 
-   * - static **SOURCE_DEFAULT_TOPIC**
-     - *String | Null*
-     - Default topic to select or null (default)
-   * - static **SOURCE_DESCRIPTION**
-     - *String* (required)
-     - Source description to show in the overlay selector
-   * - static **SOURCE_MAX_NUM**
-     - *Number*
-     - The maximum number of topics this plugin can handle, -1=unlimited (default)
-   * - static **SOURCE_TOPIC_TYPE**
-     - *String* (required)
-     - Source topic message type
-   
+.. container:: instance-attributes
 
-.. rubric:: Instance Attributes
+  .. rubric:: Instance Attributes
+  .. js:autoattribute:: WorldModel3DPluginBase#client
+  .. js:autoattribute:: WorldModel3DPluginBase#overlays
+  .. js:autoattribute:: WorldModel3DPluginBase#panel
+  .. js:autoattribute:: WorldModel3DPluginBase#ui
+  .. js:autoattribute:: WorldModel3DPluginBase#world_model
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-instance-attributes
+.. container:: instance-methods
 
-   * - **client**
-     - :doc:`BrowserClient <BrowserClient/>`
-     - Reference to Browser client
-   * - **overlays**
-     - *{ 'topic': custom_topic_data }*
-     - Custom overlay data by topic
-   * - **panel**
-     - :doc:`Panel <Panel/>`
-     - Reference to widget panel
-   * - **ui**
-     - :doc:`PanelUI <PanelUI/>`
-     - Reference to the UI
-   * - **world_model**
-     - *WorldModel3DWidget*
-     - Reference to World Model 3D widget
+  .. rubric:: Instance Methods
+  .. js:autofunction:: WorldModel3DPluginBase#addTopic
+  .. js:autofunction:: WorldModel3DPluginBase#clearAllTopics
+  .. js:autofunction:: WorldModel3DPluginBase#clearTopic
+  .. js:autofunction:: WorldModel3DPluginBase#clearVisuals
+  .. js:autofunction:: WorldModel3DPluginBase#onModelRemoved
+  .. js:autofunction:: WorldModel3DPluginBase#onTopicData
+  .. js:autofunction:: WorldModel3DPluginBase#onRender
+  .. js:autofunction:: WorldModel3DPluginBase#onResize
+  .. js:autofunction:: WorldModel3DPluginBase#setupMenu
 
-
-.. rubric:: Methods
-
-.. list-table::
-   :widths: 45 55
-   :class: api-ref-methods
-
-   * - **constructor(** *WorldModel3DWidget* world_model **)**
-     - 
-   * - **addTopic(** *String* topic **)**
-     - Add topic to this plugin, called when the user selects a new topic as overlay input
-   * - **clearAllTopics()**
-     - Clear all topics.
-   * - **clearTopic(** *String* topic **)** 
-     - Clear one topic and all its visuals
-   * - **clearVisuals(** *String* topic **)**
-     - Remove all visuals for the topic here
-   * - **onModelRemoved()**
-     - Called when robot's URDF model is removed of updated   
-   * - **onTopicData(** *String* topic, *MsgType* msg **)** 
-     - Called when data for the topic is received
-   * - **onRender()**
-     - Called from the widget's rendering loop
-   * - **onResize()**
-     - Called on panel/window resize
-   * - **setupMenu(** *jQuery* menu_els **)**
-     - Setup menu items by adding new lines into the provided menu_els container
-
-
-.. rubric:: Example
+.. rubric:: Code Example
 
 .. code-block:: javascript
-   :caption: custom-world-model-3d-plugin.js
+   :caption: JavaScript
    
    import { WorldModel3DPluginBase } from 'widgets/world-model-plugin-base';
 

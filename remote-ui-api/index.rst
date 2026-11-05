@@ -1,22 +1,22 @@
-Remote UI Extension API
-=======================
+Phantom Remote UI API Reference
+===============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Core Classes:
 
-   BrowserClient
-   MultiTopicSource
-   Panel
-   PanelUI
+   BrowserClient <BrowserClient>
+   MultiTopicSource <MultiTopicSource>
+   Panel <Panel>
+   PanelUI <PanelUI>
 
 .. toctree::
    :maxdepth: 1
    :caption: Extension Interfaces:
 
-   CompositePanelWidgetBase
-   InputDriverBase
-   ServiceInputBase
-   SingleTypePanelWidgetBase
-   VideoPluginBase
-   WorldModel3DPluginBase
+   CompositePanelWidgetBase <CompositePanelWidgetBase>
+   InputDriverBase <InputDriverBase>
+   ServiceInputBase <ServiceInputBase>
+   SingleTypePanelWidgetBase <SingleTypePanelWidgetBase>
+   VideoPluginBase <VideoPluginBase>
+   WorldModel3DPluginBase <WorldModel3DPluginBase>

@@ -4,8 +4,8 @@ Architecture
 `WebRTC <https://en.wikipedia.org/wiki/WebRTC>`_ is a real-time communication standard that allows fast
 video, voice, and generic data to be sent between peers.
 
-Peers (such the Bridge Client node on a ROS2 machine, and the Web UI used by the operator) connect P2P
-when possible over the local network. A signalling server (Bridge Server) is necessary to establish the connection,
+Peers (such the Bridge Client node on a ROS2 machine, or Phantom Remote UI used by the operator) connect P2P
+when possible over the local network. A signaling server (Bridge Server) is necessary to establish the connection,
 and a TURN/STUN server is used as a fallback connection option in cases when direct P2P link is not possible.
 
 Once the connection is established, binary `UDP protocol <https://en.wikipedia.org/wiki/User_Datagram_Protocol>`_
@@ -19,27 +19,25 @@ communication between the Peers, with the Bridge Server acting as a relay.
 .. image:: ../img/Architecture.svg
     :class: architecture
 
-To start using this Bridge, you only need to :doc:`install the Bridge Client</bridge/install>` node on your ROS2 machine.
+To start using Phantom Bridge or Remote, you only need to :doc:`install the Bridge Client</bridge/install>` to your ROS2 machine.
 
-The aforementioned cloud services and Web UI are all hosted by `Phantom Cybernetics <https://www.phantomcybernetics.com>`_ and
-provided free of charge. However, you can also :doc:`install these on your own infrasturcure </bridge/self-hosted>` and host
-everything or just selected components yourself, should you so desire.
+The aforementioned Cloud infrastructure and Phantom Remote are hosted and offered as a free service by `Phantom Cybernetics <https://www.phantomcybernetics.com>`_.
+You can also :doc:`install these on your own servers </bridge/self-hosted>` and host everything or just selected components yourself.
 
-The Bridge Client node performs various type-specific optimazations and conversions. Sometimes, it will drop older messages on purpose
+The Bridge Client node performs various type-specific optimizations and conversions. Sometimes, it will drop older messages on purpose
 in favor of low latency. This behavior is intentional and by design baked into the Phantom Bridge. The goal is not to provide 1:1
-replica of all ROS data, but rather to meaningfully optimize and compress it in order to provide accurate and fast representation of
+replica of all ROS2 data, but rather to meaningfully optimize and compress it in order to provide accurate and fast representation of
 the machine's internal state in real-time over the network.
 
-Phantom Bridge is shipped as a Docker container but also allows for :doc:`monitoring and control </remote/docker-control>` of other Docker containers installed on your machine.
-This enables ROS nodes (pre-configured as individual Docker Compose services) to be started or stopped as needed via the Web UI or a ROS service,
-thus effectively re-configuring the robot on the fly.
+Phantom Bridge is shipped as a Docker container but also allows for :doc:`monitoring and control </remote/docker-control>` of other Docker containers installed
+on the ROS2 machine. This enables ROS Nodes (pre-configured as individual Docker Compose services) to be started or stopped as needed via Phantom Remote or an API call,
+effectively re-configuring the robot on the fly.
 
 
 Distributed Systems
 -------------------
 
 On distributed systems (robots utilizing more than one compute board), you would typically run only one
-instance of the Phantom Bridge Client, while launching a standalone `Agent node <https://github.com/PhantomCybernetics/phntm_agent>`_ for every other compute board.
-Assuming the Client and various Agents can discover each other via the ROS DDS (and use the same ROS_DOMAIN_ID),
-this enables system resources monitoring, Docker container control and file extraction across all parts of your
-distributed machine.
+instance of the Phantom Bridge Client, while launching a standalone `Bridge Agent node <https://github.com/PhantomCybernetics/phntm_agent>`_ for every other
+compute board. Assuming the Bridge Client and various Agents can discover each other via the ROS2 DDS (and use the same ROS_DOMAIN_ID),
+this enables system resources monitoring, Docker container control and File extraction across all parts of your distributed machine.

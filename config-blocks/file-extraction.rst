@@ -12,5 +12,5 @@
         file_extraction_request_topic: '/file_extraction_requests' # Bridge Client sends requests here, Agents listen
         file_extraction_result_topic: '/file_extraction_results' # Brdige Agents send their results here, Client listens
         file_extraction_chunks_topic: '/file_extractor_chunks' # Agent without network access produces file chunks to this topic, Agent with access reads and uploads
-        file_extraction_enabled: True # Agent only - wheather file extraction is enabled
+        file_extraction_enabled: True # Agent only - whether file extraction is enabled
         

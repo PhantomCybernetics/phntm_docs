@@ -1,68 +1,38 @@
 InputDriverBase
 ===============
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/input/input-driver-base.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/input/input-driver-base.js
 
-Extend this class to :ref:`implement a custom input driver <implementing-custom-input-drivers>` as outlined in the code snippet below.
-A working example - driver generating Bool messages - can be found `in the Extras repository <https://github.com/PhantomCybernetics/bridge_ui_extras/blob/main/examples/input-drivers/example-bool-input-driver.js>`_
-and also :doc:`live in our demos </remote/demos/>` (switch to the `Bool Test` profile in the `Input Manager`). 
+.. container:: class-constructor
 
+  .. js:autoclass:: InputDriverBase 
 
-.. rubric:: Static Attributes
+.. container:: class-attributes  
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-static-attributes
+  .. rubric:: Static Class Attributes
+  .. js:autoattribute:: InputDriverBase#LABEL
 
-   * - static **LABEL**
-     - *String* (required)
-     - Driver label displayed in the Input Manager
+.. container:: instance-attributes
 
+  .. rubric:: Instance Attributes
+  .. js:autoattribute:: InputDriverBase#client
+  .. js:autoattribute:: InputDriverBase#input_manager
+  .. js:autoattribute:: InputDriverBase#output
+  .. js:autoattribute:: InputDriverBase#output_topic
 
-.. rubric:: Instance Attributes
+.. container:: instance-methods
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-instance-attributes
+  .. rubric:: Instance Methods
+  .. js:autofunction:: InputDriverBase#generate
+  .. js:autofunction:: InputDriverBase#getAxes
+  .. js:autofunction:: InputDriverBase#getButtons
+  .. js:autofunction:: InputDriverBase#getConfig
+  .. js:autofunction:: InputDriverBase#setConfig
 
-   * - **client**
-     - :doc:`BrowserClient <BrowserClient/>`
-     - Reference to Browser client
-   * - **input_manager**
-     - *InputManager*
-     - Reference to the Input Manager
-   * - **output**
-     - *MsgType*
-     - Last generated output
-   * - **output_topic**
-     - *String*
-     - Topic to output to
-
-
-.. rubric:: Methods
-
-.. list-table::
-   :widths: 45 55
-   :class: api-ref-methods
-
-   * - **constructor(** *InputManager* input_manager **)**
-     - 
-   * - **generate()** : *MsgType*
-     - Generate and return output message based on axes and button states
-   * - **getAxes()** : *{ 'axis_id': 'Axis name' }*
-     - Retrn a map of axes that can be mapped in the Input Manager
-   * - **getButtons()** : *{ 'btn_id': 'Btn name' }*
-     - Retrn a map of buttons that can be mapped in the Input Manager
-   * - **getConfig()** : *Any*
-     - Retrn a custom config (ony when some extra data needs to be saved)
-   * - **setConfig(** *Any* cfg **)**
-     - Apply the loaded config data
-
-
-.. rubric:: Example
+.. rubric:: Code Example
 
 .. code-block:: javascript
-   :caption: custom-input-driver.js
+   :caption: JavaScript
 
    import { InputDriverBase } from 'input/input-driver-base';
 

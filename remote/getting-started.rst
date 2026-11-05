@@ -1,7 +1,7 @@
 Getting Started
 ===============
 
-To get started with Phantom Remote, you only need to install Phantom Bridge Client to your ROS2 machune.
+To get started with Phantom Remote, you only need to install ``Phantom Bridge Client`` to your ROS2 machine.
 The Bridge Client is provided as a Docker container, ROS2 Humble to Rolling are supported.
 
 .. raw:: html

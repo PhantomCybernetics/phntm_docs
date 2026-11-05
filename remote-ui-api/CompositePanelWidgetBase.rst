@@ -1,83 +1,43 @@
 CompositePanelWidgetBase
 ========================
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/inc/composite-widget-base.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/inc/composite-widget-base.js
 
-Extend this class to implement a custom multi-topic composite widget as outlined in the code snippet below.
-A working example - :doc:`Wi-Fi signal strength map</remote/wifi-map-example/>` - can be found `in the Extras 
-repository <https://github.com/PhantomCybernetics/bridge_ui_extras/tree/main/examples/custom-wifi-map-panel-widget/>`_
-and also :doc:`live in our demos </remote/demos/>`. 
+.. container:: class-constructor
 
+  .. js:autoclass:: CompositePanelWidgetBase
 
-.. rubric:: Static Attributes
+.. container:: class-attributes
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-static-attributes
+  .. rubric:: Static Class Attributes
+  .. js:autoattribute:: CompositePanelWidgetBase#DEFAULT_HEIGHT
+  .. js:autoattribute:: CompositePanelWidgetBase#DEFAULT_WIDTH
+  .. js:autoattribute:: CompositePanelWidgetBase#LABEL
 
-   * - static **DEFAULT_HEIGHT**
-     - *Number*
-     - Default panel width in GridScale rows
-   * - static **DEFAULT_WIDTH**
-     - *Number*
-     - Default panel width in GridScale columns
-   * - static **LABEL**
-     - *String* (required)
-     - Text to display as widget's name
+.. container:: instance-attributes
 
+  .. rubric:: Instance Attributes
+  .. js:autoattribute:: CompositePanelWidgetBase#autoresize_renderer
+  .. js:autoattribute:: CompositePanelWidgetBase#client
+  .. js:autoattribute:: CompositePanelWidgetBase#panel
+  .. js:autoattribute:: CompositePanelWidgetBase#sources
+  .. js:autoattribute:: CompositePanelWidgetBase#ui
+  .. js:autoattribute:: CompositePanelWidgetBase#widget_el
 
-.. rubric:: Instance Attributes
+.. container:: instance-methods
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-instance-attributes
+  .. rubric:: Instance Methods
+  .. js:autofunction:: CompositePanelWidgetBase#getFpsString
+  .. js:autofunction:: CompositePanelWidgetBase#onClose
+  .. js:autofunction:: CompositePanelWidgetBase#onPaused
+  .. js:autofunction:: CompositePanelWidgetBase#onResize
+  .. js:autofunction:: CompositePanelWidgetBase#onUnpaused
+  .. js:autofunction:: CompositePanelWidgetBase#setupMenu
 
-   * - **autoresize_renderer**
-     - *Bool*
-     - If true, resize renderer attached to this widget automatically
-   * - **client**
-     - :doc:`BrowserClient <BrowserClient/>`
-     - Reference to Browser client
-   * - **panel**
-     - :doc:`Panel <Panel/>`
-     - Reference to widget panel
-   * - **sources**
-     - :doc:`MultiTopicSource <MultiTopicSource>`
-     - Topic sources
-   * - **ui**
-     - :doc:`PanelUI <PanelUI/>`
-     - Reference to the UI
-   * - **widget_el**
-     - *jQuery*
-     - Reference to the widget's DOM element
-
-
-.. rubric:: Methods
-
-.. list-table::
-   :widths: 45 55
-   :class: api-ref-methods
-
-   * - **constructor(** :doc:`Panel <Panel/>` panel, *String* widget_css_class **)**
-     - 
-   * - **getFpsString()** : *String*
-     - Returns string to be displayed in the FPS label
-   * - **onClose()**
-     - Called when the panel is closed
-   * - **onPaused()**
-     - Called when the panel is paused
-   * - **onResize()**
-     - Called on panel/window resize
-   * - **onUnpaused()**
-     - Called when the panel is unpaused
-   * - **setupMenu(** *jQuery* menu_els **)**
-     - Setup menu items by adding new lines into the provided menu_els container
-   
-
-.. rubric:: Example
+.. rubric:: Code Example
 
 .. code-block:: javascript
-   :caption: custom-composite-widget.js
+   :caption: JavaScript
 
    import { CompositePanelWidgetBase } from 'widgets/composite-widget-base';
 

@@ -1,85 +1,44 @@
 SingleTypePanelWidgetBase
 =========================
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/inc/single-type-widget-base.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/inc/single-type-widget-base.js
 
-Extend this class to implement a custom single-type topic widget as outlined in the code snippet below.
-A working example - :doc:`panel displaying Bool messages </remote/bool-example>` - can be found `in the Extras 
-repository <https://github.com/PhantomCybernetics/bridge_ui_extras/tree/main/examples/custom-bool-panel-widget/>`_
-and also :doc:`live in our demos </remote/demos/>`. 
+.. container:: class-constructor
 
+  .. js:autoclass:: SingleTypePanelWidgetBase
 
-.. rubric:: Static Attributes
+.. container:: class-attributes
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-static-attributes
+  .. rubric:: Static Class Attributes
+  .. js:autoattribute:: SingleTypePanelWidgetBase#DEFAULT_HEIGHT
+  .. js:autoattribute:: SingleTypePanelWidgetBase#DEFAULT_WIDTH
+  .. js:autoattribute:: SingleTypePanelWidgetBase#HANDLED_MSG_TYPES
 
-   * - static **DEFAULT_HEIGHT**
-     - *Number*
-     - Default panel width in GridScale rows
-   * - static **DEFAULT_WIDTH**
-     - *Number*
-     - Default panel width in GridScale columns
-   * - static **HANDLED_MSG_TYPES**
-     - *String[]* (required)
-     - Topic message types to associate this widget with
+.. container:: instance-attributes
 
+  .. rubric:: Instance Attributes
+  .. js:autoattribute:: SingleTypePanelWidgetBase#autoresize_renderer
+  .. js:autoattribute:: SingleTypePanelWidgetBase#client
+  .. js:autoattribute:: SingleTypePanelWidgetBase#panel
+  .. js:autoattribute:: SingleTypePanelWidgetBase#topic
+  .. js:autoattribute:: SingleTypePanelWidgetBase#ui
+  .. js:autoattribute:: SingleTypePanelWidgetBase#widget_el
 
-.. rubric:: Instance Attributes
+.. container:: instance-methods
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-instance-attributes
+  .. rubric:: Instance Methods
+  .. js:autofunction:: SingleTypePanelWidgetBase#getFpsString
+  .. js:autofunction:: SingleTypePanelWidgetBase#onClose
+  .. js:autofunction:: SingleTypePanelWidgetBase#onData
+  .. js:autofunction:: SingleTypePanelWidgetBase#onPaused
+  .. js:autofunction:: SingleTypePanelWidgetBase#onResize
+  .. js:autofunction:: SingleTypePanelWidgetBase#onUnpaused
+  .. js:autofunction:: SingleTypePanelWidgetBase#setupMenu
 
-   * - **autoresize_renderer**
-     - *Bool*
-     - If true, resize renderer attached to this widget automatically
-   * - **client**
-     - :doc:`BrowserClient <BrowserClient/>`
-     - Reference to Browser client
-   * - **panel**
-     - :doc:`Panel <Panel/>`
-     - Reference to widget panel
-   * - **topic**
-     - *String*
-     - Topic name
-   * - **ui**
-     - :doc:`PanelUI <PanelUI/>`
-     - Reference to the UI
-   * - **widget_el**
-     - *jQuery*
-     - Reference to the widget's DOM element
-
-
-.. rubric:: Methods
-
-.. list-table::
-   :widths: 45 55
-   :class: api-ref-methods
-
-   * - **constructor(** :doc:`Panel <Panel/>` panel, *String* topic, *String* widget_css_class **)**
-     - 
-   * - **getFpsString()** : *String*
-     - Returns string to be displayed in the FPS label
-   * - **onClose()**
-     - Called when the panel is closed
-   * - **onData(** *MsgType* msg **)** 
-     - Called when data for the topic is received
-   * - **onPaused()**
-     - Called when the panel is paused
-   * - **onResize()**
-     - Called on panel/window resize
-   * - **onUnpaused()**
-     - Called when the panel is unpaused
-   * - **setupMenu(** *jQuery* menu_els **)**
-     - Setup menu items by adding new lines into the provided menu_els container
-  
-
-.. rubric:: Example
+.. rubric:: Code Example
 
 .. code-block:: javascript
-   :caption: custom-single-topic-widget.js
+   :caption: JavaScript
 
    import { SingleTypePanelWidgetBase } from 'widgets/single-type-widget-base';
 

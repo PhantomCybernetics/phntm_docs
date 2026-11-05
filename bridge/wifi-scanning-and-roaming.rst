@@ -3,24 +3,24 @@ Wi-Fi Scanning & Roaming
 
 Phantom Bridge Agent facilitates wireless network scanning and automatic connection switching between different APs in the same wireless network (same SSID, different BSSID)
 also known as roaming. This is very useful when a robot needs to navigate a vast area covered by multiple APs of the same network.
-You can trigger this both by clicking a button or pressing a key ot gamepad button.
+You can trigger this both by clicking a button or pressing a key or gamepad button.
 
-.. Note:: `Wpa_supplicant <https://w1.fi/wpa_supplicant/>`_ needs to be installed on the host system. The Bridge Agent accesses it via /host_run, which is the host machine's /var/run directory mapped into the Docker contaier in your compose.yaml file. `Network Manager <https://www.networkmanager.dev/>`_ is also assumed to be installed on the host machine.
+.. Note:: `Wpa_supplicant <https://w1.fi/wpa_supplicant/>`_ needs to be installed on the host system. The Bridge Agent accesses it via /host_run, which is the host machine's /var/run directory mapped into the Docker container in your compose.yaml file. `Network Manager <https://www.networkmanager.dev/>`_ is also assumed to be installed on the host machine.
 
 The scan or roam commands can be initiated from the Web UI, either one needs to be enabled both in the Agent's and Client's config.
 You can also invoke both by calling the ``wireless_scan`` service of the Agent node.
 
-In order to perform the scan, the wireless radio typically has to momentatily pause transmission, so you can expect a brief interruption of video and data streaming.
+In order to perform the scan, the wireless radio typically has to momentarily pause transmission, so you can expect a brief interruption of video and data streaming.
 Internally, Phntm Agent uses iwlib to perform these operations.
 
 Scanning and roaming only works with certain wireless hardware chipsets and sometimes even different driver versions can cause issues.
 On some systems, switching between different AP frequencies (e.g. from 5 GHz to 2.4 GHz) can sometimes cause problems.
 
-The roam command automatically selects the AP in the current network with the best signal. If the currently conneced AP has the strongest signal, no roaming is performed.
+The roam command automatically selects the AP in the current network with the best signal. If the currently connected AP has the strongest signal, no roaming is performed.
 
-.. rubric:: Recovery from a Failure
+.. rubric:: Recovery From A Failure
 
-.. Danger:: In case of a roaming failure, your machine might end up offline, need rebooting or to be manually connected to the desired AP again. Make sure you have local console access before attemting this for the first time on untested configurations.
+.. Danger:: In case of a roaming failure, your machine might end up offline, need rebooting or to be manually connected to the desired AP again. Make sure you have local console access before attempting this for the first time on untested configurations.
 
 .. code-block:: bash
     
@@ -33,7 +33,7 @@ The roam command automatically selects the AP in the current network with the be
 .. rubric:: Configuration Options
 
 .. code-block:: yaml
-   :caption: phntm_bridge.yaml or phnrm_agent.yaml
+   :caption: phntm_bridge.yaml or phntm_agent.yaml
 
     /**:
       ros__parameters:

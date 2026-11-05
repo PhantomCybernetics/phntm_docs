@@ -2,9 +2,9 @@ Laser Scan 2D
 =============
 
 .. image:: https://d13exqa8fa735g.cloudfront.net/widget-laser.gif
-    :class: widget-laser
+    :class: widget-laser cover-graphic
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/laser-scan.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/laser-scan.js
    :caption: Widget declared in
 
 Displays 2D image of of a lidar scan for ``sensor_msgs/msg/LaserScan`` topics.

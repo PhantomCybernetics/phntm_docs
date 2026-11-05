@@ -2,14 +2,14 @@ IMU
 ===
 
 .. image:: https://d13exqa8fa735g.cloudfront.net/widget-imu.gif
-    :class: widget-imu
+    :class: widget-imu cover-graphic
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/widgets/imu.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/widgets/imu.js
     :caption: Widget declared in
 
 This panel displays IMU data from ``sensor_msgs/msg/Imu`` topics as rotation in 3D, plus it can show linear acceleration in a 2D graph.
 
-.. rubric:: Configuration options
+.. rubric:: Configuration Options
 
 .. code-block:: yaml
    :caption: phntm_bridge.yaml

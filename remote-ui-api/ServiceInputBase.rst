@@ -1,51 +1,30 @@
 ServiceInputBase
 ================
 
-.. declared-link:: https://github.com/PhantomCybernetics/phntm_bridge_ui/blob/main/static/input/service-input-base.js
+.. declared-link:: https://github.com/PhantomCybernetics/phntm_remote/blob/main/static/input/service-input-base.js
 
-Extend this class to implement a custom service input widget as outlined in the code snippet below.
-A working example - :ref:`slider menu element <implementing-custom-service-widgets>` - can be found `in the Extras 
-repository <https://github.com/PhantomCybernetics/bridge_ui_extras/tree/main/examples/custom-slider-service-widget/>`_
-and also :doc:`live in our demos </remote/demos/>`. 
+.. container:: class-constructor
 
+  .. js:autoclass:: ServiceInputBase 
 
-.. rubric:: Instance Attributes
+.. container:: instance-attributes
 
-.. list-table::
-   :widths: 25 20 55
-   :class: api-ref-instance-attributes
+  .. rubric:: Instance Attributes
+  .. js:autoattribute:: ServiceInputBase#client
+  .. js:autoattribute:: ServiceInputBase#id_service
 
-   * - **client**
-     - :doc:`BrowserClient <BrowserClient/>`
-     - Reference to Browser client
-   * - **id_service**
-     - *String*
-     - ID service
+.. container:: instance-methods
 
+  .. rubric:: Instance Methods
+  .. js:autofunction:: ServiceInputBase#getCurrentValue
+  .. js:autofunction:: ServiceInputBase#makeElements
+  .. js:autofunction:: ServiceInputBase#onValueChanged
+  .. js:autofunction:: ServiceInputBase#updateDisplay
 
-.. rubric:: Methods
-
-.. list-table::
-   :widths: 45 55
-   :class: api-ref-methods
-
-   * - **constructor(** *String* id_service, :doc:`BrowserClient <BrowserClient/>` client **)**
-     - 
-   * - **getCurrentValue(** *Callback* done_cb, *Callback* err_cb **)**
-     - Handle loading of the current value, i.e. via a getter service call, call done_cb() or err_cb() when done
-   * - **makeElements(** *jQuery* target_el **)** 
-     - Create your DOM elements here and append them to the target_el
-   * - **onValueChanged(** *SrvMsgType* msg **)**
-     - Trigerred when another peer updates the service, override to update the UI
-   * - **updateDisplay(** *Any* value, *Bool* is_error = false **)**
-     - Update created DOM elements with value
-   
-
-
-.. rubric:: Example
+.. rubric:: Code Example
 
 .. code-block:: javascript
-   :caption: custom-service-input.js
+   :caption: JavaScript
 
    import { ServiceInputBase } from 'input/service-input-base';
 

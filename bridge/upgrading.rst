@@ -1,8 +1,8 @@
-Upgrading
-=========
+Upgrading Phantom Bridge Client
+===============================
 
 .. Note:: You may want to follow our `Bluesky account <https://bsky.app/profile/phntm.io>`_ for updates and service announcements.
-          Significant milestones and new features will be also occationally announced by e-mail.
+          Significant milestones and new features will be also occasionally announced by e-mail.
 
 .. rubric:: Stop and remove the current Docker Container
 
