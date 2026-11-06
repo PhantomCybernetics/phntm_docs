@@ -1626,3 +1626,23 @@ dl.field-list > dt {
 .attribute.type STRONG {
     text-transform: none;
 }
+
+.class-constructor A.reference,
+.instance-attributes A.reference,
+.instance-methods A.reference {
+    text-decoration: none;
+    color: rgb(255, 195, 0);
+}
+.instance-methods A.reference,
+.instance-methods A.reference span.pre {
+    color: #7ef53d !important;
+}
+
+.class-constructor A.reference:hover,
+.instance-attributes A.reference:hover,
+.instance-methods A.reference:hover
+ {
+    text-decoration: underline;
+}
+
+
