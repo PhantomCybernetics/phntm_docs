@@ -54,7 +54,22 @@ html_js_files = [
 ]
 
 redirects = {
-    "bridge/ui/ros-services": "bridge/ros-services-and-actions",
+    "bridge/ui/ros-services": "/bridge/ros-services-and-actions",
+    "bridge/basics/architecture": "/bridge/architecture",
+    "bridge/demos": "/remote/demos",
+    "bridge/basics/install": "/bridge/install",
+    "bridge/basics/configuration": "/bridge/configuration",
+    "bridge/ui/overview": "/remote",
+    "bridge/ui-widgets/index": "/remote",
+    "bridge/ui/user-input-and-teleoperation": "/remote/user-input-and-teleoperation",
+    "bridge/ui/ros-services-and-actions" : "/remote/ros-services-and-actions",
+    "bridge/ui/runtime-ros-parameters": "/remote/runtime-ros-parameters",
+    "bridge/ui/docker-control": "/remote/docker-control",
+    "bridge/ui/touchscreen-interface": "/remote/touchscreen-interface",
+    "bridge/basics/custom-message-types": "/bridge/custom-message-types",
+    "bridge/ui/customizing": "/remote/customizing",
+    "bridge/ui-api-docs/index": "/remote-ui-api",
+    "bridge/security-and-privacy": "/remote/security-and-privacy"
 }
 
 spelling_lang = "en_US"

@@ -18,7 +18,7 @@ On some systems, switching between different AP frequencies (e.g. from 5 GHz to 
 
 The roam command automatically selects the AP in the current network with the best signal. If the currently connected AP has the strongest signal, no roaming is performed.
 
-.. rubric:: Recovery From A Failure
+.. rubric:: Recovering From Failure
 
 .. Danger:: In case of a roaming failure, your machine might end up offline, need rebooting or to be manually connected to the desired AP again. Make sure you have local console access before attempting this for the first time on untested configurations.
 

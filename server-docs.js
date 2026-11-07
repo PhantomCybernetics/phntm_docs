@@ -45,6 +45,9 @@ app.get('/remote', (req, res) => {
 app.get('/bridge', (req, res) => {
    return res.redirect(301, '/bridge/index');
 });
+app.get([ '/remote-ui-api', '/bridge/ui-api-docs' ], (req, res) => {
+   return res.redirect(301, '/remote-ui-api/index');
+});
 
 app.get('/*doc_path', (req, res) => {
 

@@ -70,9 +70,9 @@ rm -rf _build/*; make html
 ```
 
 #### Live CSS
-When editig the CSS, you may want to do this:
+The `make html` command also does this, so that you don't have to:
 ```bash
-make html; rm -f _build/html/_static/custom.css; ln _static/custom.css _build/html/_static
+rm -f _build/html/_static/custom.css; ln _static/custom.css _build/html/_static
 ```
 
 ### Run the Server

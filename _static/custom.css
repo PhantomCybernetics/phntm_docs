@@ -333,9 +333,9 @@ A.btn-link {
     color: #0a0a0a !important;
     border: none;
     border-radius: 8px;
-    font-weight: 600;
-    font-size: 13.5px;
-    letter-spacing: 0.3px;
+    font-weight: 500;
+    font-size: 15.5px;
+    letter-spacing: 0.2px;
     cursor: pointer;
     font-family: var(--font-sans);
     transition: all 0.2s ease;
@@ -348,7 +348,7 @@ A.btn-link {
 }
 
 .document .btn-install  {
-    margin: 50px auto 50px auto;
+    margin: 50px auto 20px auto;
 }
 
 a.btn-install::after {
@@ -441,6 +441,27 @@ a.btn-install::after {
 
 .footer-social a {
     font-size: 18px;
+}
+
+.company-links .icon {
+    display: inline-block;
+    margin-right: 3px;
+    position: relative;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.company-links .icon.mail {
+    background-image: url(icon-mail.svg);
+    background-size: 32px;
+}
+
+.company-links .icon.canada {
+    background-image: url(icon-canada.svg);
 }
 
 .document {
